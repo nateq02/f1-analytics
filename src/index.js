@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {Logo, Box} from './App';
+import {Logo, Box, DriverStandings, ConstructorStandings, Countdown} from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -9,10 +9,10 @@ root.render(
   <React.StrictMode>
     <Logo />
     <div className="flex flex-wrap justify-center content-center gap-x-5 gap-y-10 h-[90vh]">
+      <DriverStandings />
+      <Countdown />
       <Box />
-      <Box />
-      <Box />
-      <Box />
+      <ConstructorStandings />
       <Box />
       <Box />
     </div>

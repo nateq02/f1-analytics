@@ -42,4 +42,28 @@ function Box() {
   )
 }
 
-export { Logo, Box };
+function DriverStandings() {
+  return (
+    <div className="box">
+      <h1 className="h1">Driver Standings</h1>
+    </div>
+  )
+}
+
+function ConstructorStandings() {
+  return (
+    <div className="box">
+      <h1 className="h1">Constructor Standings</h1>
+    </div>
+  )
+}
+
+function Countdown() {
+  return (
+    <div className="box">
+      <h1 className="h1">Countdown to Race Weekend</h1>
+    </div>
+  )
+}
+
+export { Logo, Box, DriverStandings, ConstructorStandings, Countdown };
