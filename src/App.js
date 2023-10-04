@@ -1,5 +1,5 @@
 import './App.css';
-import axios from "axios"
+import axios from 'axios'
 
 /*function App() {
   return (
@@ -31,8 +31,6 @@ import axios from "axios"
   );
 }*/
 
-const url = 'http://127.0.0.1:8000'
-
 function Logo() {
   return (
     <img src={require("./logo.jpg")} className="w-80" alt="logo" />
@@ -45,52 +43,56 @@ function Box() {
   )
 }
 
-function DriverStandings() {
-  // a function to retrieve data from backend
-  const fetchData = async () => {
-    // try/catch for error handling
-    try{
-      // use axios to get driver standings at url
-      const response = await axios.get(`${url}/driver-standings`);
-      
-      // extracts data from the response
-      const data = response.data;
+async function fetchData({ url })  {
+  // try/catch for error handling
+  try{
+    // use axios to get driver standings at url
+    const response = await axios.get(`${url}/driver-standings`);
+    
+    // extracts data from the response
+    const data = response.data;
 
-      return data;
-    }
-    // return the error if one arises
-    catch (error) {
-      return error;
-    }
-  };
-  
-  // then/catch is used to handle a promise, which is what "data" is
-    // If the req is successful, then...
-  fetchData()
-    .then(data => {
-      // Converting the string data to JSON
-      data = JSON.parse(data);
-      return data;
-    })
-    .catch(error => {
-      return error
-    });
+    return data;
+  }
+  // return the error if one arises
+  catch (error) {
+    return error;
+  }
+};
 
-  /*
-    const promiseAwait = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve('Hi!');
-        }, 1000);
-    });
-    const result = await promiseAwait;
-    console.log(result);
- */
-
-  /*return (
-    <div className="box">
-      <h1 className="h1">Driver Standings</h1>
+function standingRow({ data }, val) {
+  if (data){
+    return (
+    <div key={data[val].driverId}>
+      <p>{data[val].position}</p>
+      <p>{data[val].constructorNames}</p>
+      <p>{data[val].givenName} {data[val].familyName}</p>
+      <p>{data[val].points}</p>
     </div>
-  )*/
+  );
+}
+else {
+  return <div />
+}
+};
+
+function DriverStandings({ data }) {
+  const rows = [];
+
+  for (let i = 0; i < data.length; i++) {
+    rows.push(standingRow({data}, i));
+  };
+  /*
+  const rows = data.map((driver,index) => (
+    <standingRow data={driver} val={index} />
+  ))*/
+
+  return (
+    <div className="box overflow-y-scroll">
+      <h1 className="h1">Driver Standings</h1>
+      {rows}
+    </div>
+  )
 };
 
 function ConstructorStandings() {
@@ -138,4 +140,4 @@ function Countdown() {
   )
 }
 
-export { Logo, Box, DriverStandings, ConstructorStandings, Countdown };
+export { Logo, Box, DriverStandings, ConstructorStandings, Countdown, fetchData };
