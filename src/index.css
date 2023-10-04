@@ -13,3 +13,7 @@ html {
 .box {
     @apply border rounded-lg border-red-600 w-[30%] h-[45%]
 }
+
+td, th {
+    @apply text-center
+}

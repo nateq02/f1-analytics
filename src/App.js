@@ -63,12 +63,12 @@ async function fetchData({ url })  {
 function standingRow({ data }, val) {
   if (data){
     return (
-    <div key={data[val].driverId}>
-      <p>{data[val].position}</p>
-      <p>{data[val].constructorNames}</p>
-      <p>{data[val].givenName} {data[val].familyName}</p>
-      <p>{data[val].points}</p>
-    </div>
+    <tr key={data[val].driverId}>
+      <td>{data[val].position}</td>
+      <td>{data[val].givenName} {data[val].familyName}</td>
+      <td>{data[val].constructorNames}</td>
+      <td>{data[val].points}</td>
+    </tr>
   );
 }
 else {
@@ -82,15 +82,19 @@ function DriverStandings({ data }) {
   for (let i = 0; i < data.length; i++) {
     rows.push(standingRow({data}, i));
   };
-  /*
-  const rows = data.map((driver,index) => (
-    <standingRow data={driver} val={index} />
-  ))*/
 
   return (
     <div className="box overflow-y-scroll">
-      <h1 className="h1">Driver Standings</h1>
-      {rows}
+      <h1 className="h1 underline">Driver Standings</h1>
+      <table className = "w-full h-full">
+        <tr>
+          <th>Place</th>
+          <th>Name</th>
+          <th>Team</th>
+          <th>Points</th>
+        </tr>
+        {rows}
+      </table>
     </div>
   )
 };
