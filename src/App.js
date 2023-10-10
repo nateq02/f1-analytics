@@ -1,5 +1,6 @@
 import './App.css';
 import axios from 'axios'
+import {useFetchData} from './fetch.js'
 
 /*function App() {
   return (
@@ -33,7 +34,9 @@ import axios from 'axios'
 
 function Logo() {
   return (
-    <img src={require("./logo.jpg")} className="w-80" alt="logo" />
+    <header>
+      <img src={require("./logo.jpg")} className="w-80" alt="logo" />
+    </header>
   );
 }
 
@@ -43,58 +46,68 @@ function Box() {
   )
 }
 
-async function fetchData({ url })  {
-  // try/catch for error handling
-  try{
-    // use axios to get driver standings at url
-    const response = await axios.get(`${url}/driver-standings`);
-    
-    // extracts data from the response
-    const data = response.data;
 
-    return data;
-  }
-  // return the error if one arises
-  catch (error) {
-    return error;
-  }
-};
-
-function standingRow({ data }, val) {
-  if (data){
+// function used to create a row in standings table
+  // Takes input of driver
+function DriverStandingRow({ driver }) {
+  // If data is not None i.e. data is retrieved
+  if (driver){
+    // Return a table row with position, name, constructor, points
     return (
-    <tr key={data[val].driverId}>
-      <td>{data[val].position}</td>
-      <td>{data[val].givenName} {data[val].familyName}</td>
-      <td>{data[val].constructorNames}</td>
-      <td>{data[val].points}</td>
+    <tr key={driver.driverId}>
+      <td>{driver.position}</td>
+      <td>{driver.givenName} {driver.familyName}</td>
+      <td>{driver.constructorNames}</td>
+      <td>{driver.points}</td>
     </tr>
   );
 }
-else {
-  return <div />
-}
+  // If no data, return a message
+  else {
+    return <div>Data Unavailable</div>
+  }
 };
 
-function DriverStandings({ data }) {
-  const rows = [];
+// Actual DriverStandings component
+function DriverStandings() {
+  // calls useFetchData to get data
+  let input = useFetchData('http://127.0.0.1:8000', '/driver-standings')
 
-  for (let i = 0; i < data.length; i++) {
-    rows.push(standingRow({data}, i));
-  };
+  // Checks if request is still loading
+    // If still loading, show that on the webpage
+  if (input.isLoading) {
+    return (
+      <div className="box flex justify-center">
+        <div>Loading...</div>
+      </div>
+    )
+  }
 
+  // when data finally loads, load the box with the table
   return (
-    <div className="box overflow-y-scroll">
-      <h1 className="h1 underline">Driver Standings</h1>
-      <table className = "w-full h-full">
-        <tr>
-          <th>Place</th>
-          <th>Name</th>
-          <th>Team</th>
-          <th>Points</th>
-        </tr>
-        {rows}
-      </table>
+    <div className="box flex flex-col">
+      <div className="sticky top-0">
+        <h1 className="h1 underline h-1/6">Driver Standings</h1>
+      </div>
+      <div className="h-5/6 overflow-y-scroll">
+        <table className="w-full">
+          <thead>
+            <tr>
+              <th>Place</th>
+              <th>Name</th>
+              <th>Team</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              input.data.map((driver, index) => (
+                <DriverStandingRow key={index} driver={driver} />
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 };
@@ -144,4 +157,4 @@ function Countdown() {
   )
 }
 
-export { Logo, Box, DriverStandings, ConstructorStandings, Countdown, fetchData };
+export { Logo, Box, DriverStandings, ConstructorStandings, Countdown };
