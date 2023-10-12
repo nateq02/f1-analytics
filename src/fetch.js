@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 // This is a custom hook meant to fetch data from the backend
@@ -43,7 +43,7 @@ const useFetchData = (url, path) => {
         }
     // Call the fetch data
     fetchData();
-    }, []);
+    }, [url, path]);
     // Return a collection of data and isLoading
     return { data, isLoading };
 };

@@ -1,36 +1,7 @@
 import './App.css';
-import axios from 'axios'
 import {useFetchData} from './fetch.js'
 
-/*function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}*/
-/*function App() {
-  return (
-    <div>
-      <h1 className = "text-3xl fond-bold underline bg-slate-600">
-        Hello world!
-      </h1>
-    </div>
-  );
-}*/
+const url = 'http://127.0.0.1:8000'
 
 function Logo() {
   return (
@@ -39,7 +10,7 @@ function Logo() {
     </header>
   );
 }
-
+// Can delete as the boxes get filled in with other components
 function Box() {
   return (
     <div className="border rounded-lg border-red-500 w-[30%] h-[45%]"></div>
@@ -70,13 +41,13 @@ function DriverStandingRow({ driver }) {
 // Actual DriverStandings component
 function DriverStandings() {
   // calls useFetchData to get data
-  let input = useFetchData('http://127.0.0.1:8000', '/driver-standings')
+  let input = useFetchData(url, '/driver-standings')
 
   // Checks if request is still loading
     // If still loading, show that on the webpage
   if (input.isLoading) {
     return (
-      <div className="box flex justify-center">
+      <div className="box flex justify-center content-center">
         <div>Loading...</div>
       </div>
     )
@@ -88,7 +59,7 @@ function DriverStandings() {
       <div className="sticky top-0">
         <h1 className="h1 underline h-1/6">Driver Standings</h1>
       </div>
-      <div className="h-5/6 overflow-y-scroll">
+      <div className="h-5/6 overflow-y-scroll mt-2">
         <table className="w-full">
           <thead>
             <tr>
@@ -133,13 +104,13 @@ function ConstructorStandingRow({ constr }) {
 
 function ConstructorStandings() {
   // calls useFetchData to get data
-  let input = useFetchData('http://127.0.0.1:8000', '/constructor-standings')
+  let input = useFetchData(url, '/constructor-standings')
 
   // Checks if request is still loading
     // If still loading, show that on the webpage
   if (input.isLoading) {
     return (
-      <div className="box flex justify-center">
+      <div className="box flex justify-center content-center">
         <div>Loading...</div>
       </div>
     )
@@ -151,7 +122,7 @@ function ConstructorStandings() {
       <div className="sticky top-0">
         <h1 className="h1 underline h-1/6">Constructor Standings</h1>
       </div>
-      <div>
+      <div className="h-5/6 overflow-y-scroll mt-2">
         <table className="w-full">
           <thead>
             <tr>
@@ -172,13 +143,6 @@ function ConstructorStandings() {
     </div>
   )
 };
-/*function ConstructorStandings() {
-  return (
-    <div className="box">
-      <h1 className="h1">Constructor Standings</h1>
-    </div>
-  )
-}*/
 
 function Countdown() {
   /*const fetchData = async () => {
