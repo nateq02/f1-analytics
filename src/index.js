@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { Logo, Box, DriverStandings, ConstructorStandings, Countdown } from './App';
+import { Logo, Box, Countdown } from './App';
+import { DriverStandings } from './components/DriverStandings'
+import { ConstructorStandings } from './components/ConstructorStandings'
 import reportWebVitals from './reportWebVitals';
 
 const url = 'http://127.0.0.1:8000'

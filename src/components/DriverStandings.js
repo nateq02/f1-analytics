@@ -1,5 +1,5 @@
-import './App.css';
-import {useFetchData} from './fetch.js'
+import '../App.css';
+import { useFetchData } from '../hooks/useFetchData.js'
 
 // function used to create a row in driver standings table
   // Takes input of driver
@@ -25,7 +25,7 @@ function DriverStandingRow({ driver }) {
   // Actual DriverStandings component
   function DriverStandings() {
     // calls useFetchData to get data
-    let input = useFetchData(url, '/driver-standings')
+    let input = useFetchData('./driver-standings')
   
     // Checks if request is still loading
       // If still loading, show that on the webpage
@@ -66,4 +66,4 @@ function DriverStandingRow({ driver }) {
     )
   };
 
-  export default DriverStandings
+  export { DriverStandings };

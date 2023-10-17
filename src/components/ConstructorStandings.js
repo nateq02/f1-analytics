@@ -1,5 +1,5 @@
-import './App.css';
-import {useFetchData} from './fetch.js'
+import '../App.css';
+import { useFetchData } from '../hooks/useFetchData.js'
 
 // function used to create a row in driver standings table
 // Takes input of driver
@@ -23,7 +23,7 @@ function ConstructorStandingRow({ constr }) {
   
   function ConstructorStandings() {
     // calls useFetchData to get data
-    let input = useFetchData(url, '/constructor-standings')
+    let input = useFetchData('/constructor-standings')
   
     // Checks if request is still loading
       // If still loading, show that on the webpage
@@ -63,4 +63,4 @@ function ConstructorStandingRow({ constr }) {
     )
   };
   
-  export default ConstructorStandings;
+  export { ConstructorStandings };

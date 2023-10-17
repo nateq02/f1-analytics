@@ -1,5 +1,5 @@
 import './App.css';
-import {useFetchData} from './fetch.js'
+import {useFetchData} from './hooks/useFetchData.js'
 
 function Logo() {
   return (
