@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { Logo, Box, Countdown } from './App';
-import { DriverStandings } from './components/DriverStandings'
-import { ConstructorStandings } from './components/ConstructorStandings'
+//import { Logo, Box, Countdown } from './App';
+import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 
 const url = 'http://127.0.0.1:8000'
@@ -11,15 +10,7 @@ const url = 'http://127.0.0.1:8000'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Logo />
-    <div className="flex flex-wrap justify-center content-center gap-x-5 gap-y-10 h-[90vh]">
-      <DriverStandings />
-      <Countdown />
-      <Box />
-      <ConstructorStandings />
-      <Box />
-      <Box />
-    </div>
+    <App />
   </React.StrictMode>
 );
 

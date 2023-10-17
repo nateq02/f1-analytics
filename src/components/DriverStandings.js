@@ -25,11 +25,11 @@ function DriverStandingRow({ driver }) {
   // Actual DriverStandings component
   function DriverStandings() {
     // calls useFetchData to get data
-    let input = useFetchData('./driver-standings')
+    let { data, isLoading } = useFetchData('/driver-standings')
   
     // Checks if request is still loading
       // If still loading, show that on the webpage
-    if (input.isLoading) {
+    if (isLoading) {
       return (
         <div className="box flex justify-center content-center">
           <div>Loading...</div>
@@ -55,7 +55,7 @@ function DriverStandingRow({ driver }) {
             </thead>
             <tbody>
               {
-                input.data.map((driver, index) => (
+                data.map((driver, index) => (
                   <DriverStandingRow key={index} driver={driver} />
                 ))
               }

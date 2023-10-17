@@ -14,7 +14,7 @@ const useFetchData = (path) => {
         // used as a check on the frontend
     const [isLoading, setIsLoading] = useState(true);
 
-    let url = 'http://127.0.0.1:8000'
+    const url = 'http://127.0.0.1:8000'
     // useEffect is supposed to have some benefits header  
         // It's best practice
         // It allows the webpage to load if the process of getting data takes longer
@@ -33,7 +33,7 @@ const useFetchData = (path) => {
                 // Set state of data to the JSON data
                 setData(jsonData);
             }
-            // Catch any erros and log them --> probably a better way to handle this
+            // Catch any errors and log them --> probably a better way to handle this
             catch (error) {
                 console.log(error);
             }

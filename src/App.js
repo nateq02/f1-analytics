@@ -1,4 +1,7 @@
 import './App.css';
+import './index.css';
+import { DriverStandings } from './components/DriverStandings'
+import { ConstructorStandings } from './components/ConstructorStandings'
 import {useFetchData} from './hooks/useFetchData.js'
 
 function Logo() {
@@ -52,4 +55,20 @@ function Countdown() {
   )
 }
 
-export { Logo, Box, Countdown };
+function App () {
+  return (
+    <>
+      <Logo />
+      <div className="flex flex-wrap justify-center content-center gap-x-5 gap-y-10 h-[90vh]">
+        <DriverStandings />
+        <Countdown />
+        <Box />
+        <ConstructorStandings />
+        <Box />
+        <Box />
+      </div>
+    </>
+  )
+}
+
+export { Logo, Box, Countdown, App };

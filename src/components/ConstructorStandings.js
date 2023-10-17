@@ -29,9 +29,11 @@ function ConstructorStandingRow({ constr }) {
       // If still loading, show that on the webpage
     if (input.isLoading) {
       return (
-        <div className="box flex justify-center content-center">
-          <div>Loading...</div>
-        </div>
+        <> 
+          <div className="box flex justify-center content-center">
+            <div>Loading...</div>
+          </div>
+        </>
       )
     }
   
