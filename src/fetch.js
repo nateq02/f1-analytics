@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 // This is a custom hook meant to fetch data from the backend
-const useFetchData = (url, path) => {
+const useFetchData = (url = "http://127.0.0.1:8000", path) => {
     // uses useState for several reasons
         // As data changes, we are able to rerender our components with new data
         // Makes this function more reusable?
