@@ -1,7 +1,8 @@
 import './App.css';
 import './index.css';
-import { DriverStandings } from './components/DriverStandings'
-import { ConstructorStandings } from './components/ConstructorStandings'
+import { DriverStandings } from './components/DriverStandings';
+import { ConstructorStandings } from './components/ConstructorStandings';
+import { Countdown } from './components/Countdown';
 import {useFetchData} from './hooks/useFetchData.js'
 
 function Logo() {
@@ -18,7 +19,7 @@ function Box() {
   )
 }
 
-function Countdown() {
+/*function Countdown() {
   /*const fetchData = async () => {
     try{
       const response = await axios.get(`${url}/next`);
@@ -43,7 +44,7 @@ function Countdown() {
       console.log(error.response);
     }
   }
-  fetchData();*/
+  fetchData();
 
 
   //const response = await axios.get('http://localhost:8000/next');
@@ -53,7 +54,7 @@ function Countdown() {
         <h1 className="h1">Countdown to Race Weekend</h1>
       </div>
   )
-}
+}*/
 
 function App () {
   return (
@@ -71,4 +72,4 @@ function App () {
   )
 }
 
-export { Logo, Box, Countdown, App };
+export { Logo, Box, App };
