@@ -97,11 +97,34 @@ function Countdown() {
 
     return (
         <div className="box flex flex-col">
-            <h1 className="h1 underline h-1/6">Countdown to Race Weekend</h1>
-            <div className="flex flex-col justify-between items-center h-full text-xl">
-                <div className="text-center">Next Event: {next_event_name}</div>
-                <div className="text-center">Next Session: {next_session}</div>
-                <div className="text-center">Countdown: {days} days, {hours} hours, {minutes} minutes, {seconds} seconds</div>    
+            <h1 className="h1 h-1/6 mx-2">Countdown to Race Weekend</h1>
+            <div className="flex flex-col justify-between items-center h-full text-xl mx-2">
+                <div className="text-center mt-3">
+                    <div className="text-lg underline">Next Event</div>
+                    <div className="italic">{next_event_name}</div>
+                </div>
+                <div className="text-center">
+                    <div className="text-lg underline">Next Session</div>
+                    <div className="italic">{next_session}</div>
+                </div>
+                <table className="w-full table-fixed mb-3">
+                    <thead className="text-lg underline">
+                        <tr>
+                            <td>Days</td>
+                            <td>Hours</td>
+                            <td>Minutes</td>
+                            <td>Seconds</td>
+                        </tr>
+                    </thead>
+                    <tbody className="text-3xl">
+                        <tr>
+                            <th>{days}</th>
+                            <th>{hours}</th>
+                            <th>{minutes}</th>
+                            <th>{seconds}</th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     )

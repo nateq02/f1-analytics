@@ -41,9 +41,9 @@ function DriverStandingRow({ driver }) {
     return (
       <div className="box flex flex-col">
         <div className="sticky top-0">
-          <h1 className="h1 underline h-1/6">Driver Standings</h1>
+          <h1 className="h1 h-1/6 mx-2">Driver Standings</h1>
         </div>
-        <div className="h-5/6 overflow-y-scroll mt-2">
+        <div className="h-5/6 overflow-y-scroll mt-2 mx-2">
           <table className="w-full">
             <thead>
               <tr>
