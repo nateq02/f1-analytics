@@ -1,5 +1,6 @@
 import '../App.css';
 import { useFetchData } from '../hooks/useFetchData.js'
+import { Loading } from './Loading'
 
 // function used to create a row in driver standings table
 // Takes input of driver
@@ -29,11 +30,7 @@ function ConstructorStandingRow({ constr }) {
       // If still loading, show that on the webpage
     if (input.isLoading) {
       return (
-        <> 
-            <div className="box flex justify-center items-center">
-                <div class="w-5 h-5 border-t-4 border-red-600 border-solid rounded-full animate-spin"></div>
-            </div>
-        </>
+        <Loading />
       )
     }
   

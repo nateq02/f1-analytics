@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFetchData } from '../hooks/useFetchData';
-
+import { Loading } from './Loading'
 /* ******** TO DO ***********
 - Add logic to fetch next event when the countdown < 0
     - Or do I want to also include a "happening now" for when session is occuring?
@@ -87,9 +87,7 @@ function Countdown() {
             // Ensures that countdown does not render with null values
     if (isLoading || hours == null) {
         return (
-            <div className="box flex justify-center items-center">
-                <div class="w-5 h-5 border-t-4 border-red-600 border-solid rounded-full animate-spin"></div>
-            </div>
+            <Loading />
             )
     }
 
