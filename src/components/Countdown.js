@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useFetchData } from '../hooks/useFetchData';
 
-
 /* ******** TO DO ***********
 - Add logic to fetch next event when the countdown < 0
     - Or do I want to also include a "happening now" for when session is occuring?
-- Fix refresh issue: at initial refresh data hasn't rendered -> large negative numbers
-- Break down component into smaller components
+- How to break this down into smaller components?
 */
 
 function Countdown() {
@@ -89,8 +87,8 @@ function Countdown() {
             // Ensures that countdown does not render with null values
     if (isLoading || hours == null) {
         return (
-            <div className="box flex justify-center content-center">
-                Loading...
+            <div className="box flex justify-center items-center">
+                <div class="w-5 h-5 border-t-4 border-red-600 border-solid rounded-full animate-spin"></div>
             </div>
             )
     }
