@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useFetchData } from '../hooks/useFetchData';
 import { Loading } from './Loading'
+
 /* ******** TO DO ***********
 - Add logic to fetch next event when the countdown < 0
     - Or do I want to also include a "happening now" for when session is occuring?
 - How to break this down into smaller components?
 */
 
-function Countdown() {
+function Countdown({ data, isLoading }) {
     // Declares state components for the countdown
     let [days, setDays] = useState(null);
     let [hours, setHours] = useState(null);
     let [minutes, setMinutes] = useState(null);
     let [seconds, setSeconds] = useState(null);
-
-    // Fetch the data and destructure it
-    const { data, isLoading } = useFetchData('/next');
 
     // Will set data to an empty string if it hasn't loaded quite yet
     const next_event = data ? data[0] : "";
@@ -24,7 +22,7 @@ function Countdown() {
     let next_event_name = String(next_event.OfficialEventName);
     const next_event_name_words = next_event_name.split(" ");
     for (let i = 0; i < next_event_name_words.length; i++) {
-        next_event_name_words[i] = next_event_name_words[i][0].toUpperCase() + next_event_name_words[i].substr(1).toLowerCase();
+        next_event_name_words[i] = next_event_name_words[i].charAt(0) + next_event_name_words[i].substr(1).toLowerCase();
     }
     next_event_name = next_event_name_words.join(" ");
 
