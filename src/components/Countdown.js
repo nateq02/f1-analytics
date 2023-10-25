@@ -3,13 +3,15 @@ import { useFetchData } from '../hooks/useFetchData';
 import { Loading } from './Loading'
 
 /* ******** TO DO ***********
-- Add logic to fetch next event when the countdown < 0
-    - Or do I want to also include a "happening now" for when session is occuring?
-- How to break this down into smaller components?
+- Need to add a useEffect that will get next event when one has passed
+- Break down component into smaller components
 */
 
 function Countdown({ data, isLoading }) {
     // Declares state components for the countdown
+    let [nextName, setNextName] = useState(null);
+    let [nextTime, setNextTime] = useState(null);
+
     let [days, setDays] = useState(null);
     let [hours, setHours] = useState(null);
     let [minutes, setMinutes] = useState(null);
@@ -47,35 +49,41 @@ function Countdown({ data, isLoading }) {
     const curr_date_time = new Date();
 
     // Iterates through session list, determines closest session that has not passed
-        // Gets session name and time
-    let next_session = null;
-    let next_session_time = null;
-    let min = Infinity;
-    for (const event in event_date_time_dict){
-        // find difference between times
-        let diff = event_date_time_dict[event] - curr_date_time;
+    // Used for updating upcoming events if they change
+    useEffect(() => {
+        let min = Infinity;
 
-        // if time difference is less than current min, and >0, then it's the upcoming event
-        if (diff < min && diff > 0){
-            min = diff;
-            next_session = next_event[event];
-            next_session_time = event_date_time_dict[event];
+        for (const event in event_date_time_dict) {
+            // find difference between times
+            let diff = event_date_time_dict[event] - curr_date_time;
+            
+            // if a session has passed, remove it from the dictionary
+            if (diff < 0) {
+                delete event_date_time_dict[event];
+            }
+            // if time difference is less than current min, and >0, then it's the upcoming event
+            if (diff < min && diff > 0){
+                min = diff;
+                setNextName(next_event[event]);
+                setNextTime(event_date_time_dict[event]);
+            }
         }
-    }
+    }, [])
     // Used for the actual countdown
     useEffect(() => {
         // only renders if next_session_time is not null
-        if (next_session_time){
+        if (nextTime){
             // interval stores a unique id for the interval countdown
             const interval = setInterval(() => {
                 // compute difference between next session and not + set state!
-                const diff = next_session_time - Date.now();
+                const diff = nextTime - Date.now();
     
                 setDays(Math.floor(diff / (1000 * 60 * 60 * 24)));
                 setHours(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
                 setMinutes(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)));
                 setSeconds(Math.floor((diff % (1000 * 60)) / 1000));
             }, 1000);   // Update every second
+
             return () => clearInterval(interval); // clearInterval stops the countdown when it reaches 0
         }
     }, [Date.now()]); // Date.now() is a dependency: want a refresh after it changes
