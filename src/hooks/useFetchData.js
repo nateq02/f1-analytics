@@ -14,6 +14,8 @@ const useFetchData = (path) => {
         // used as a check on the frontend
     const [isLoading, setIsLoading] = useState(true);
 
+    const [error, setError] = useState(null);
+
     const url = 'http://127.0.0.1:8000'
     // useEffect is supposed to have some benefits header  
         // It's best practice
@@ -34,8 +36,8 @@ const useFetchData = (path) => {
                 setData(jsonData);
             }
             // Catch any errors and log them --> probably a better way to handle this
-            catch (error) {
-                console.log(error);
+            catch (e) {
+                setError(e);
             }
             // When everything is done, set isLoading to indicate the data has been set
             finally {
@@ -44,7 +46,7 @@ const useFetchData = (path) => {
         }
     // Call the fetch data
     fetchData();
-    }, [url, path]);
+    }, [path]);
     // Return a collection of data and isLoading
     return { data, isLoading };
 };
