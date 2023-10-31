@@ -5,6 +5,7 @@ import { DriverStandings } from './components/DriverStandings';
 import { ConstructorStandings } from './components/ConstructorStandings';
 import { Countdown } from './components/Countdown';
 import { UpcomingEvents } from './components/UpcomingEvents';
+import { LastRaceResults } from './components/LastRaceResults';
 import { useFetchData } from './hooks/useFetchData';
 
 function Logo() {
@@ -31,7 +32,7 @@ function App () {
       <div className="flex flex-wrap justify-center content-center gap-x-5 gap-y-10 h-[90vh]">
         <DriverStandings />
         <Countdown data={data} isLoading={isLoading}/>
-        <Box />
+        <LastRaceResults />
         <ConstructorStandings />
         <UpcomingEvents data={data} isLoading={isLoading}/>
         <Box />

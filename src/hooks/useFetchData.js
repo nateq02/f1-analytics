@@ -48,7 +48,7 @@ const useFetchData = (path) => {
     fetchData();
     }, [path]);
     // Return a collection of data and isLoading
-    return { data, isLoading };
+    return { data, isLoading, error };
 };
 
 export { useFetchData };

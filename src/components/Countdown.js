@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useFetchData } from '../hooks/useFetchData';
 import { Loading } from './Loading'
 
 /* ******** TO DO ***********
@@ -9,9 +8,6 @@ import { Loading } from './Loading'
 
 function Countdown({ data, isLoading }) {
     // Declares state components for the countdown
-    let [nextName, setNextName] = useState(null);
-    let [nextTime, setNextTime] = useState(null);
-
     let [days, setDays] = useState(null);
     let [hours, setHours] = useState(null);
     let [minutes, setMinutes] = useState(null);
@@ -50,29 +46,31 @@ function Countdown({ data, isLoading }) {
 
     // Iterates through session list, determines closest session that has not passed
     // Used for updating upcoming events if they change
-    useEffect(() => {
-        let min = Infinity;
+    let min = Infinity;
+    let nextName = null;
+    let nextTime = null;
 
-        for (const event in event_date_time_dict) {
-            // find difference between times
-            let diff = event_date_time_dict[event] - curr_date_time;
-            
-            // if a session has passed, remove it from the dictionary
-            if (diff < 0) {
-                delete event_date_time_dict[event];
-            }
-            // if time difference is less than current min, and >0, then it's the upcoming event
-            if (diff < min && diff > 0){
-                min = diff;
-                setNextName(next_event[event]);
-                setNextTime(event_date_time_dict[event]);
-            }
+    for (const event in event_date_time_dict) {
+        // find difference between times
+        let diff = event_date_time_dict[event] - curr_date_time;
+        
+        // if a session has passed, remove it from the dictionary
+        if (diff < 0) {
+            delete event_date_time_dict[event];
         }
-    }, [])
+        // if time difference is less than current min, and >0, then it's the upcoming event
+        if (diff < min && diff > 0){
+            min = diff;
+            nextName = next_event[event];
+            nextTime = event_date_time_dict[event];
+            console.log(event_date_time_dict);
+        }
+    }
+
     // Used for the actual countdown
     useEffect(() => {
         // only renders if next_session_time is not null
-        if (nextTime){
+        if (nextTime) {
             // interval stores a unique id for the interval countdown
             const interval = setInterval(() => {
                 // compute difference between next session and not + set state!
@@ -86,16 +84,20 @@ function Countdown({ data, isLoading }) {
 
             return () => clearInterval(interval); // clearInterval stops the countdown when it reaches 0
         }
-    }, [Date.now()]); // Date.now() is a dependency: want a refresh after it changes
+    }, [nextTime, days, hours, minutes, seconds]); // Date.now() is a dependency: want a refresh after it changes
 
     // Renders a Loading... prompt on the screen
         // hours == null makes loading render if hours has not been assigned (data is not loaded)
             // Ensures that countdown does not render with null values
-    if (isLoading || hours == null) {
-        return (
-            <Loading />
-            )
-    }
+    if (isLoading || hours == null) return <Loading />
+
+    // if (isLoading){
+    //     console.log('is loading');
+    //     if (hours==null){
+    //         console.log('hours is null')
+    //     }
+    //     return <Loading />
+    // }
 
     return (
         <div className="box flex flex-col">
