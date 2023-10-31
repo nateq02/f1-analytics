@@ -6,15 +6,29 @@ import { Loading } from './Loading'
   // Takes input of driver
 function DriverStandingRow({ driver }) {
     // If data is not None i.e. data is retrieved
-    if (driver){
-      // Return a table row with position, name, constructor, points
-      return (
-      <tr key={driver.driverId}>
-        <td>{driver.position}</td>
-        <td>{driver.givenName} {driver.familyName}</td>
-        <td>{driver.constructorNames}</td>
-        <td>{driver.points}</td>
-      </tr>
+  if (driver){
+    let textColor = null;
+    switch(driver.position) {
+      case 1:
+        textColor = 'text-yellow-500';
+        break;
+      case 2: 
+        textColor = 'text-slate-400';
+        break;
+      case 3: 
+        textColor = 'text-amber-600';
+        break;
+      default:
+        textColor = '';
+    }
+    // Return a table row with position, name, constructor, points
+    return (
+    <tr key={driver.driverId} className={textColor}>
+      <td>{driver.position}</td>
+      <td>{driver.givenName} {driver.familyName}</td>
+      <td>{driver.constructorNames}</td>
+      <td>{driver.points}</td>
+    </tr>
     );
   }
     // If no data, return a message

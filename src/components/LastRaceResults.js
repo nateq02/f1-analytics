@@ -21,6 +21,7 @@ function formatTime({ data }) {
     return `+ ${time/1000}`;
   }
 
+  else if (data.position !== null && time === null) return <div>DNF</div>
   else return <div>Data Unavailable</div>
 }
 
@@ -28,10 +29,26 @@ function formatTime({ data }) {
 function LastRaceStandingRow({ data }) {
   // Return a table row if data is fetched
   if (data) {
+    let textColor = null;
+    switch(data.position) {
+      case 1:
+        textColor = 'text-yellow-500';
+        break;
+      case 2: 
+        textColor = 'text-slate-400';
+        break;
+      case 3: 
+        textColor = 'text-amber-600';
+        break;
+      default:
+        textColor = '';
+    }
+
+    // fastest lap code for reference: className={data.fastestLapRank === 1 ? 'text-purple-600' : ''}
     return (
-      <tr key={data.number} className={data.fastestLapRank === 1 ? 'text-purple-600' : ''}>
+      <tr key={data.number} className={textColor}>
         <td>{data.position}</td>
-        <td>{data.givenName} {data.familyName}</td>
+        <td>{data.familyName}</td>
         <td>{data.constructorName}</td>
         <td>{data.points}</td>
         <td>{formatTime({ data })}</td>

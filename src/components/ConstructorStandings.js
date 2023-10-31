@@ -7,9 +7,23 @@ import { Loading } from './Loading'
 function ConstructorStandingRow({ constr }) {
     // If data is not None i.e. data is retrieved
     if (constr){
+      let textColor = null;
+      switch(constr.position) {
+        case 1:
+          textColor = 'text-yellow-500';
+          break;
+        case 2: 
+          textColor = 'text-slate-400';
+          break;
+        case 3: 
+          textColor = 'text-amber-600';
+          break;
+        default:
+          textColor = '';
+      }
       // Return a table row with position, name, constructor, points
       return (
-      <tr key={constr.constructorId}>
+      <tr key={constr.constructorId} className={textColor}>
         <td>{constr.position}</td>
         <td>{constr.constructorName}</td>
         <td>{constr.points}</td>
