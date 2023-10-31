@@ -63,7 +63,6 @@ function Countdown({ data, isLoading }) {
             min = diff;
             nextName = next_event[event];
             nextTime = event_date_time_dict[event];
-            console.log(event_date_time_dict);
         }
     }
 
