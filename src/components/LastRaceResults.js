@@ -1,6 +1,8 @@
 import { useFetchData } from '../hooks/useFetchData'
 import { Loading } from './Loading'
 
+// function used to format totalRaceTime from API call
+    // converts time in ms to hh:mm:ss.ms
 function formatTime({ data }) {
   const time = data.totalRaceTime;
 
@@ -14,6 +16,7 @@ function formatTime({ data }) {
     return formattedTime;
   }
 
+  // Times for drivers not in first are given as interval to first place
   else if (time && data.position !== 1){
     return `+ ${time/1000}`;
   }
@@ -21,9 +24,9 @@ function formatTime({ data }) {
   else return <div>Data Unavailable</div>
 }
 
+// function used to create a row in Last Race Standing row
 function LastRaceStandingRow({ data }) {
-  const time = null;
-
+  // Return a table row if data is fetched
   if (data) {
     return (
       <tr key={data.number} className={data.fastestLapRank === 1 ? 'text-purple-600' : ''}>
@@ -35,17 +38,22 @@ function LastRaceStandingRow({ data }) {
       </tr>
     )
   }
-
+  
+  // if no data, return a message
   else {
     return <div>Data Unavailable</div>
   }
 }
 
+// component for last race results
 function LastRaceResults() {
+  // useFetchData used to get data
   let { data, isLoading } = useFetchData('/last-race-results')
   
+  // reloading if data has not been fetched yet
   if (isLoading) return <Loading />
 
+  // Load the table with last race results when the data is fetched
   return (
     <div className="box flex flex-col">
       <div className="sticky top-0">
