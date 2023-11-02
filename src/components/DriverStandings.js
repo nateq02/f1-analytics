@@ -1,4 +1,5 @@
 import '../App.css';
+import { Link } from "react-router-dom"
 import { useFetchData } from '../hooks/useFetchData.js'
 import { Loading } from './Loading'
 
@@ -54,7 +55,9 @@ function DriverStandingRow({ driver }) {
     return (
       <div className="box flex flex-col">
         <div className="sticky top-0">
-          <h1 className="h1 h-1/6 mx-2">Driver Standings</h1>
+          <Link to="/standings">
+            <h1 className="h1 h-1/6 mx-2 hover:underline">Driver Standings</h1>
+          </Link>
         </div>
         <div className="h-5/6 overflow-y-auto mt-2 mx-2">
           <table className="w-full">

@@ -1,4 +1,5 @@
 import '../App.css';
+import { Link } from "react-router-dom"
 import { useFetchData } from '../hooks/useFetchData.js'
 import { Loading } from './Loading'
 
@@ -52,7 +53,9 @@ function ConstructorStandingRow({ constr }) {
     return (
       <div className="box flex flex-col">
         <div className="sticky top-0">
-          <h1 className="h1 h-1/6 mx-2">Constructor Standings</h1>
+          <Link to="/standings">
+            <h1 className="h1 h-1/6 mx-2 hover:underline">Constructor Standings</h1>
+          </Link>
         </div>
         <div className="h-5/6 overflow-y-auto mt-2 mx-2">
           <table className="w-full">

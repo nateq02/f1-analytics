@@ -1,5 +1,7 @@
+import { NavBar } from "../components/NavBar"
+
 function Standings() {
-    return <div>Standings Page</div>
+    return <NavBar />
 }
 
 export { Standings }
