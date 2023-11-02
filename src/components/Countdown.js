@@ -1,12 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Loading } from './Loading'
 
 /* ******** TO DO ***********
 - Need to add a useEffect that will get next event when one has passed
 - Break down component into smaller components
 */
+function getNextSession(next_event, session_dict) {
+    // Gets current date
+    const curr_date_time = new Date();
+
+    // Iterates through session list, determines closest session that has not passed
+    // Used for updating upcoming events if they change
+    let min = Infinity;
+    let nextName = null;
+    let nextTime = null;
+
+    for (const event in session_dict) {
+        // find difference between times
+        let diff = session_dict[event] - curr_date_time;
+        
+        // if a session has passed, remove it from the dictionary
+        if (diff < 0) {
+            delete session_dict[event];
+        }
+        // if time difference is less than current min, and >0, then it's the upcoming event
+        if (diff < min && diff > 0){
+            min = diff;
+            nextName = next_event[event];
+            nextTime = session_dict[event];
+        }
+    }
+    return {nextName, nextTime};
+}
 
 function Countdown({ data, isLoading }) {
+    
     // Declares state components for the countdown
     let [days, setDays] = useState(null);
     let [hours, setHours] = useState(null);
@@ -40,31 +68,11 @@ function Countdown({ data, isLoading }) {
 
         event_date_time_dict[event] = local_time // values should be a date/time value
     }
-
-    // Gets current date
-    const curr_date_time = new Date();
-
-    // Iterates through session list, determines closest session that has not passed
-    // Used for updating upcoming events if they change
-    let min = Infinity;
-    let nextName = null;
-    let nextTime = null;
-
-    for (const event in event_date_time_dict) {
-        // find difference between times
-        let diff = event_date_time_dict[event] - curr_date_time;
-        
-        // if a session has passed, remove it from the dictionary
-        if (diff < 0) {
-            delete event_date_time_dict[event];
-        }
-        // if time difference is less than current min, and >0, then it's the upcoming event
-        if (diff < min && diff > 0){
-            min = diff;
-            nextName = next_event[event];
-            nextTime = event_date_time_dict[event];
-        }
-    }
+    
+    // Caches the next session, only updates when event_date_time_dict is updated
+        // Aka when a past event has been deleted
+    const {nextName, nextTime} = useMemo(() => getNextSession(next_event, event_date_time_dict)
+        , [next_event, event_date_time_dict])
 
     // Used for the actual countdown
     useEffect(() => {

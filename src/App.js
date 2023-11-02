@@ -1,44 +1,19 @@
 import './App.css';
 import './index.css';
-import { useContext } from 'react'
-import { DriverStandings } from './components/DriverStandings';
-import { ConstructorStandings } from './components/ConstructorStandings';
-import { Countdown } from './components/Countdown';
-import { UpcomingEvents } from './components/UpcomingEvents';
-import { LastRaceResults } from './components/LastRaceResults';
-import { useFetchData } from './hooks/useFetchData';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import routes from "./routes"
+import { Logo, Box, Home } from "./pages/Home"
+import { Standings } from "./pages/Standings"
 
-function Logo() {
+function App() {
   return (
-    <header>
-      <img src={require("./logo.jpg")} className="w-80" alt="logo" />
-    </header>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/standings" element={<Standings />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
-// Can delete as the boxes get filled in with other components
-function Box() {
-  return (
-    <div className="border rounded-lg border-red-500 w-[30%] h-[45%]"></div>
-  )
-}
-
-function App () {
-  // Fetch the data and destructure it
-  const { data, isLoading } = useFetchData('/next');
-
-  return (
-    <>
-      <Logo />
-      <div className="flex flex-wrap justify-center content-center gap-x-5 gap-y-10 h-[90vh]">
-        <DriverStandings />
-        <Countdown data={data} isLoading={isLoading}/>
-        <LastRaceResults />
-        <ConstructorStandings />
-        <UpcomingEvents data={data} isLoading={isLoading}/>
-        <Box />
-      </div>
-    </>
-  )
 }
 
 export { Logo, Box, App };
