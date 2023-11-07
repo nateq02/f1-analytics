@@ -1,15 +1,21 @@
 import { Loading } from './Loading'
 import React from 'react';
 
+// Makes a table row for each upcoming event
 function UpcomingEventsRow({ event }) {
+    // if an event is loaded (not null) ...
     if (event) {
+        // get upcoming event name from the event prop
         const next_event_name = String(event.OfficialEventName);
         const next_event_name_words = next_event_name.split(" ");
+
+        // convert upcoming event name to proper format
         for (let i = 0; i < next_event_name_words.length; i++) {
             next_event_name_words[i] = next_event_name_words[i].charAt(0) + next_event_name_words[i].substr(1).toLowerCase();
         }
         const formattedEventName = next_event_name_words.join(" ");
 
+        // format event date
         const eventDate = new Date(event.EventDate);
         const formattedDate = eventDate.toLocaleDateString("en-US");
 
@@ -24,7 +30,7 @@ function UpcomingEventsRow({ event }) {
     return <div>Data Unavailable</div>
 }
 function UpcomingEvents({ data, isLoading }) {
-
+    // if data has not been loaded yet, indicate it
     if (isLoading) {
         return (
             <Loading />

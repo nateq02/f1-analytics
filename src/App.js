@@ -2,7 +2,7 @@ import './App.css';
 import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import routes from "./routes"
-import { Logo, Box, Home } from "./pages/Home"
+import { Home } from "./pages/Home"
 import { Standings } from "./pages/Standings"
 
 function App() {
@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export { Logo, Box, App };
+export { App };

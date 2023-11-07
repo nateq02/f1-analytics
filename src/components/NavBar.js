@@ -1,10 +1,10 @@
-import LogoPic from "../logo.jpg"
+import LogoPic from "../logo.png"
 import { Link } from "react-router-dom"
 
 function NavBar() {
     return (
         <nav>
-            <div className="flex items-center gap-10">
+            <div className="flex h-14 items-center gap-10">
                 <Link to="/">
                     <img src={LogoPic} className="w-60" alt="logo" />                
                 </Link>

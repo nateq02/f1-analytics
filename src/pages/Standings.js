@@ -1,7 +1,11 @@
 import { NavBar } from "../components/NavBar"
 
 function Standings() {
-    return <NavBar />
+    return (
+        <div className="font-default">
+            <NavBar />
+        </div>
+    )
 }
 
 export { Standings }
