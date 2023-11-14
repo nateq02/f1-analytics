@@ -7,6 +7,7 @@ import { ConstructorStandings } from '../components/ConstructorStandings';
 import { Countdown } from '../components/Countdown';
 import { UpcomingEvents } from '../components/UpcomingEvents';
 import { LastRaceResults } from '../components/LastRaceResults';
+import { NextCircuit } from '../components/NextCircuit'
 import { useFetchData } from '../hooks/useFetchData';
 
 // Can delete as the boxes get filled in with other components
@@ -29,7 +30,7 @@ function Home () {
         <LastRaceResults />
         <ConstructorStandings />
         <UpcomingEvents data={data} isLoading={isLoading}/>
-        <Box />
+        <NextCircuit />
       </div>
     </div>
   )
