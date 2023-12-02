@@ -42,8 +42,8 @@ function Countdown({ data, isLoading }) {
     let [seconds, setSeconds] = useState(null);
 
     // Will set data to an empty string if it hasn't loaded quite yet
-    const next_event = data ? data[0] : "";
-
+    // const next_event = data ? data[0] : "";
+    const next_event = data;
     // Getting next event, formatting the string with proper capitalization
     let next_event_name = String(next_event.OfficialEventName);
     const next_event_name_words = next_event_name.split(" ");

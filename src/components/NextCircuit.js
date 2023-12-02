@@ -85,29 +85,30 @@ function NextCircuit() {
     const circuitData = circuit.data;
     const circuitIsLoading = circuit.isLoading;
 
-    let track, trackAngle, rotatedTrack, x, y, chartData; 
-
-    // if (data) {
-    //     track = data.map(obj => [obj.X, obj.Y])
-    //     console.log(track)
-    // }
-
-    // if (circuitData && track){
-    //     trackAngle = circuitData.rotation / 180 * Math.PI;
-
-    //     rotatedTrack = rotate(track, trackAngle);
-    //     //console.log(trackAngle);
-
-    // }
+    let track, trackAngle, rotatedTrack, x, y, xy, chartData; 
 
     if (data) {
-        x = data.map(obj => obj.X);
-        y = data.map(obj => obj.Y);
+        track = data.map(obj => [obj.X, obj.Y])
+        //console.log(track)
+    }
 
+    if (circuitData && track){
+        trackAngle = circuitData.rotation / 180 * Math.PI;
+
+        rotatedTrack = rotate(track, trackAngle);
+        console.log(rotatedTrack);
+
+    }
+
+    if (rotatedTrack) {
+        // x = rotatedTrack.map(obj => obj[0]);
+        // y = rotatedTrack.map(obj => obj[1]);
+        xy = rotatedTrack.map(obj => [obj[0], obj[1]]);
+        const dataStuff = xy.sort((a, b) => a[0] - b[0]);
         chartData = {
-            labels: x,
+            labels: dataStuff.map(obj => obj[0]),
             datasets: [{
-                data: y
+                data: dataStuff.map(obj => obj[1])
             }]
         }
     }

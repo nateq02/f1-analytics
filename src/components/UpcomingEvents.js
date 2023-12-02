@@ -52,9 +52,10 @@ function UpcomingEvents({ data, isLoading }) {
                     </thead>
                     <tbody>
                         {
-                            data.map((event, index) => (
+                            /*data.map((event, index) => (
                                 <UpcomingEventsRow key={index} event={event} />
-                            ))
+                            ))*/
+                            <UpcomingEventsRow event={data} />
                         }
                     </tbody>
                 </table>
