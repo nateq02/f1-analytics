@@ -47,7 +47,7 @@ function Home () {
   };
 
   const isLoading=false;
-  
+
   return (
     <div className="font-default">
       <NavBar />
@@ -57,7 +57,7 @@ function Home () {
         <LastRaceResults />
         <ConstructorStandings />
         <UpcomingEvents data={data} isLoading={isLoading}/>
-        <NextCircuit />
+        
       </div>
     </div>
   )

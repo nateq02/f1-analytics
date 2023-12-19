@@ -1,4 +1,4 @@
-import LogoPic from "../logo.png"
+import { Logo } from "./Logo"
 import { Link } from "react-router-dom"
 
 function NavBar() {
@@ -6,7 +6,7 @@ function NavBar() {
         <nav>
             <div className="flex h-14 items-center gap-10 ml-4 mt-2">
                 <Link to="/">
-                    <img src={LogoPic} className="w-60" alt="logo" />                
+                    <Logo />
                 </Link>
                 <Link to="/standings" className="h1 hover:underline">
                     Standings
