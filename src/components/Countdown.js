@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Loading } from './Loading'
+import { Loading } from './Loading';
+import verHamPic from '../imgs/ham-ver-pic.png';
 
 /* ******** TO DO ***********
 - Need to add a useEffect that will get next event when one has passed
@@ -107,7 +108,8 @@ function Countdown({ data, isLoading }) {
     // }
 
     return (
-        <div className="box flex flex-col">
+        <>
+        {/*<div className="box flex flex-col">
             <h1 className="h1 h-1/6 mx-2">Countdown to Race Weekend</h1>
             <div className="flex flex-col justify-between items-center h-full text-xl mx-2">
                 <div className="text-center mt-3">
@@ -138,6 +140,16 @@ function Countdown({ data, isLoading }) {
                 </table>
             </div>
         </div>
+    */}
+    <div className='h-52 w-10/12'>
+        <div className='h-full w-80 border flex'> {/* Need to figure out how to get a background image*/}
+            <h1 className='text-4xl font-bold text-white text-center mt-2'>Countdown to Race Weekend</h1>
+        </div>
+        <div>
+            
+        </div>
+    </div>
+    </>
     )
 }
 

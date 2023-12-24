@@ -3,12 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-    background-color: #f0f0f0;
-}
-
 .h1 {
-    @apply text-2xl font-bold leading-tight text-red-600 text-center mt-2;
+    @apply text-2xl font-bold leading-tight text-red-600 text-center;
   }
 
 .box {

@@ -51,13 +51,12 @@ function Home () {
   return (
     <div className="font-default">
       <NavBar />
-      <div className="flex flex-wrap justify-center content-center gap-x-5 gap-y-10 h-[90vh]">
-        <DriverStandings />
+      <div className="flex flex-wrap justify-center content-center gap-x-5 gap-y-10 h-[90vh] bg-gray-300">
+        {/*<DriverStandings />*/}
         <Countdown data={data} isLoading={isLoading}/>
-        <LastRaceResults />
+        {/*<LastRaceResults />
         <ConstructorStandings />
-        <UpcomingEvents data={data} isLoading={isLoading}/>
-        
+        <UpcomingEvents data={data} isLoading={isLoading}/>*/}
       </div>
     </div>
   )
