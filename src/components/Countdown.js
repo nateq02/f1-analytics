@@ -141,12 +141,38 @@ function Countdown({ data, isLoading }) {
             </div>
         </div>
     */}
-    <div className='h-52 w-10/12'>
-        <div className='h-full w-80 border flex'> {/* Need to figure out how to get a background image*/}
-            <h1 className='text-4xl font-bold text-white text-center mt-2'>Countdown to Race Weekend</h1>
+    <div className='h-52 w-10/12 flex'>
+        <div className="h-full w-1/4 flex bg-black bg-cover border-black border-2"> {/* Need to figure out how to get a background image*/}
+            <img src={verHamPic} className="w-full opacity-90"></img>
+            <div className="absolute w-1/6 mx-8">
+                <h1 className='text-4xl font-bold text-white mt-2 text-center text-wrap'>Countdown to Race Weekend</h1>
+            </div>
         </div>
-        <div>
-            
+        <div className="border-black border-2 border-l-0 w-3/4 bg-white flex justify-between">
+            <div className="w-1/3">
+                <h2 className="subheading mt-3">Next Event</h2>
+                <p className="subtext">{next_event_name}</p>
+                <h2 className="subheading mt-2">Next Session</h2>
+                <p className="subtext">{nextName}</p>
+            </div>
+            <div className="w-1/2 border-black flex justify-between mr-20">
+                <div className="flex flex-col justify-center items-center">
+                    <p className="countdownText">{days}</p>
+                    <p>DAYS</p>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                    <p className="countdownText">{hours}</p>
+                    <p>HOURS</p>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                    <p className="countdownText">{minutes}</p>
+                    <p>MINUTES</p>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                    <p className="countdownText">{seconds}</p>
+                    <p>SECONDS</p>
+                </div>
+            </div>
         </div>
     </div>
     </>
