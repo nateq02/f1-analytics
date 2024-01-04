@@ -109,7 +109,7 @@ function Countdown({ data, isLoading }) {
             </div>
             <div className="border-black border-2 border-l-0 w-3/4 bg-white flex justify-between">
                 <div className="w-1/3">
-                    <h2 className="subheading mt-3">Next Event</h2>
+                    <h2 className="subheading mt-2">Next Event</h2>
                     <p className="subtext">{next_event_name}</p>
                     <h2 className="subheading mt-2">Next Session</h2>
                     <p className="subtext">{nextName}</p>

@@ -70,8 +70,8 @@ function UpcomingEvents({ data, isLoading }) {
                     <h1 className="sectionHeader mt-2 text-center text-wrap">Upcoming Schedule</h1>
                 </div>
             </div>
-            <div className="border-black border-2 border-l-0 w-3/4 bg-white flex justify-between">
-                <table className="w-full table-auto">
+            <div className="border-black border-2 border-l-0 w-3/4 bg-white flex justify-between overflow-y-auto">
+                <table className="w-full table-auto mt-2">
                     <thead>
                         <tr>
                             <th className="subheading mt-3 text-left pl-7">Event</th>

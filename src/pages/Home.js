@@ -2,6 +2,7 @@ import '../App.css';
 import '../index.css';
 import { BrowserRouter, Route } from "react-router-dom"
 import { NavBar } from "../components/NavBar"
+import { CurrentStandings } from '../components/CurrentStandings';
 import { DriverStandings } from '../components/DriverStandings';
 import { ConstructorStandings } from '../components/ConstructorStandings';
 import { Countdown } from '../components/Countdown';
@@ -51,9 +52,10 @@ function Home () {
   return (
     <div className="font-default">
       <NavBar />
-      <div className="flex flex-wrap justify-center content-center gap-x-5 gap-y-10 h-[90vh] bg-gray-300">
+      <div className="flex flex-col flex-wrap justify-center content-center gap-x-5 gap-y-8 h-[90vh] bg-gray-300">
         {/*<DriverStandings />*/}
         <Countdown data={data[0]} isLoading={isLoading}/> {/*Added the [0] for the dummy data*/}
+        <CurrentStandings />
         {/*<LastRaceResults />
         <ConstructorStandings />*/}
         <UpcomingEvents data={data} isLoading={isLoading}/>
