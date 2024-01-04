@@ -1,5 +1,6 @@
 import { Loading } from './Loading'
 import React from 'react';
+import raceStart from '../imgs/race-start.png'
 
 // Makes a table row for each upcoming event
 function UpcomingEventsRow({ event }) {
@@ -21,8 +22,8 @@ function UpcomingEventsRow({ event }) {
 
         return (
             <tr key={event.RoundNumber}>
-                <td>{formattedEventName}</td>
-                <td>{formattedDate}</td>
+                <td className="subtext text-left pl-7">{formattedEventName}</td>
+                <td className="subtext text-left pl-7">{formattedDate}</td>
             </tr>
         )
     }
@@ -38,7 +39,8 @@ function UpcomingEvents({ data, isLoading }) {
     }
 
     return (
-        <div className="box flex flex-col">
+        <>
+        {/*<div className="box flex flex-col">
             <div className="sticky top-0">
                 <h1 className="h1 h-1/6 mx-2">Upcoming Events</h1>
             </div>
@@ -54,13 +56,39 @@ function UpcomingEvents({ data, isLoading }) {
                         {
                             /*data.map((event, index) => (
                                 <UpcomingEventsRow key={index} event={event} />
-                            ))*/
+                            ))
                             <UpcomingEventsRow event={data} />
                         }
                     </tbody>
                 </table>
             </div>
+        </div>*/}
+        <div className="h-1/5 w-10/12 flex">
+            <div className="h-full w-1/4 flex border-black border-2">
+                <img src={raceStart} className="w-full opacity-90"></img>
+                <div className="absolute w-1/6 mx-8">
+                    <h1 className="sectionHeader mt-2 text-center text-wrap">Upcoming Schedule</h1>
+                </div>
+            </div>
+            <div className="border-black border-2 border-l-0 w-3/4 bg-white flex justify-between">
+                <table className="w-full table-auto">
+                    <thead>
+                        <tr>
+                            <th className="subheading mt-3 text-left pl-7">Event</th>
+                            <th className="subheading text-left pl-7">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            data.map((event) => (
+                                <UpcomingEventsRow event={event} />
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
+        </>
     )
 }
 

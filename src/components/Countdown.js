@@ -99,83 +99,41 @@ function Countdown({ data, isLoading }) {
             // Ensures that countdown does not render with null values
     if (isLoading || hours == null) return <Loading />
 
-    // if (isLoading){
-    //     console.log('is loading');
-    //     if (hours==null){
-    //         console.log('hours is null')
-    //     }
-    //     return <Loading />
-    // }
-
     return (
-        <>
-        {/*<div className="box flex flex-col">
-            <h1 className="h1 h-1/6 mx-2">Countdown to Race Weekend</h1>
-            <div className="flex flex-col justify-between items-center h-full text-xl mx-2">
-                <div className="text-center mt-3">
-                    <div className="text-lg underline">Next Event</div>
-                    <div className="italic">{next_event_name}</div>
+        <div className='h-1/4 w-10/12 flex'>
+            <div className="h-full w-1/4 flex bg-black bg-cover border-black border-2">
+                <img src={verHamPic} className="w-full opacity-90"></img>
+                <div className="absolute w-1/6 mx-8">
+                    <h1 className='sectionHeader mt-2 text-center text-wrap'>Countdown to Race Weekend</h1>
                 </div>
-                <div className="text-center">
-                    <div className="text-lg underline">Next Session</div>
-                    <div className="italic">{nextName}</div>
-                </div>
-                <table className="w-full table-fixed mb-3">
-                    <thead className="text-lg underline">
-                        <tr>
-                            <td>Days</td>
-                            <td>Hours</td>
-                            <td>Minutes</td>
-                            <td>Seconds</td>
-                        </tr>
-                    </thead>
-                    <tbody className="text-3xl">
-                        <tr>
-                            <th>{days}</th>
-                            <th>{hours}</th>
-                            <th>{minutes}</th>
-                            <th>{seconds}</th>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-        </div>
-    */}
-    <div className='h-52 w-10/12 flex'>
-        <div className="h-full w-1/4 flex bg-black bg-cover border-black border-2"> {/* Need to figure out how to get a background image*/}
-            <img src={verHamPic} className="w-full opacity-90"></img>
-            <div className="absolute w-1/6 mx-8">
-                <h1 className='text-4xl font-bold text-white mt-2 text-center text-wrap'>Countdown to Race Weekend</h1>
-            </div>
-        </div>
-        <div className="border-black border-2 border-l-0 w-3/4 bg-white flex justify-between">
-            <div className="w-1/3">
-                <h2 className="subheading mt-3">Next Event</h2>
-                <p className="subtext">{next_event_name}</p>
-                <h2 className="subheading mt-2">Next Session</h2>
-                <p className="subtext">{nextName}</p>
-            </div>
-            <div className="w-1/2 border-black flex justify-between mr-20">
-                <div className="flex flex-col justify-center items-center">
-                    <p className="countdownText">{days}</p>
-                    <p>DAYS</p>
+            <div className="border-black border-2 border-l-0 w-3/4 bg-white flex justify-between">
+                <div className="w-1/3">
+                    <h2 className="subheading mt-3">Next Event</h2>
+                    <p className="subtext">{next_event_name}</p>
+                    <h2 className="subheading mt-2">Next Session</h2>
+                    <p className="subtext">{nextName}</p>
                 </div>
-                <div className="flex flex-col justify-center items-center">
-                    <p className="countdownText">{hours}</p>
-                    <p>HOURS</p>
-                </div>
-                <div className="flex flex-col justify-center items-center">
-                    <p className="countdownText">{minutes}</p>
-                    <p>MINUTES</p>
-                </div>
-                <div className="flex flex-col justify-center items-center">
-                    <p className="countdownText">{seconds}</p>
-                    <p>SECONDS</p>
+                <div className="w-1/2 border-black flex justify-between mr-20">
+                    <div className="flex flex-col justify-center items-center">
+                        <p className="countdownText">{days}</p>
+                        <p>DAYS</p>
+                    </div>
+                    <div className="flex flex-col justify-center items-center">
+                        <p className="countdownText">{hours}</p>
+                        <p>HOURS</p>
+                    </div>
+                    <div className="flex flex-col justify-center items-center">
+                        <p className="countdownText">{minutes}</p>
+                        <p>MINUTES</p>
+                    </div>
+                    <div className="flex flex-col justify-center items-center">
+                        <p className="countdownText">{seconds}</p>
+                        <p>SECONDS</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    </>
     )
 }
 

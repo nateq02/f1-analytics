@@ -20,7 +20,7 @@ function Box() {
 function Home () {
   // Fetch the data and destructure it
   // const { data, isLoading } = useFetchData('/next');
-  const data = {
+  const data = [{
     RoundNumber: 1,
     Country: 'Bahrain',
     Location: 'Sakhir',
@@ -44,7 +44,7 @@ function Home () {
     Session5Date: '2024-03-02 18:00:00+03:00',
     Session5DateUtc: '2024-02-29 15:00:00',
     F1ApiSupport: 'True'
-  };
+  }];
 
   const isLoading=false;
 
@@ -53,10 +53,10 @@ function Home () {
       <NavBar />
       <div className="flex flex-wrap justify-center content-center gap-x-5 gap-y-10 h-[90vh] bg-gray-300">
         {/*<DriverStandings />*/}
-        <Countdown data={data} isLoading={isLoading}/>
+        <Countdown data={data[0]} isLoading={isLoading}/> {/*Added the [0] for the dummy data*/}
         {/*<LastRaceResults />
-        <ConstructorStandings />
-        <UpcomingEvents data={data} isLoading={isLoading}/>*/}
+        <ConstructorStandings />*/}
+        <UpcomingEvents data={data} isLoading={isLoading}/>
       </div>
     </div>
   )
