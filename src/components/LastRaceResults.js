@@ -1,27 +1,44 @@
+import { format } from 'mathjs';
 import { useFetchData } from '../hooks/useFetchData'
 import { Loading } from './Loading'
 
+function formatText( {event} ) {
+  if (event) {
+    // get upcoming event name from the event prop
+    const next_event_name = String(event.OfficialEventName);
+    const next_event_name_words = next_event_name.split(" ");
+
+    // convert upcoming event name to proper format
+    for (let i = 0; i < next_event_name_words.length; i++) {
+        next_event_name_words[i] = next_event_name_words[i].charAt(0) + next_event_name_words[i].substr(1).toLowerCase();
+    }
+    const formattedEventName = next_event_name_words.join(" ");
+    
+    return formattedEventName;
+  }
+  else return <Loading />
+}
 // function used to format totalRaceTime from API call
     // converts time in ms to hh:mm:ss.ms
 function formatTime({ data }) {
-  const time = data.totalRaceTime;
+  const time = data.Time;
 
-  if (time && data.position === 1) {
+  if (time && data.ClassifiedPosition === '1') {
     const hours = Math.floor(time / (1000 * 60 * 60));
     const mins = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((time % (1000 * 60)) / 1000);
     const ms = time % 1000;
 
-    const formattedTime = `${hours}:${mins < 10 ? `0${mins}`: ''}:${secs}.${ms}`
+    const formattedTime = `${hours}:${mins < 10 ? `0${mins}`: `${mins}`}:${secs < 10 ? `0${secs}`: `${secs}`}.${ms}`
     return formattedTime;
   }
 
   // Times for drivers not in first are given as interval to first place
-  else if (time && data.position !== 1){
+  else if (time && data.position !== '1'){
     return `+ ${time/1000}`;
   }
 
-  else if (data.position !== null && time === null) return <div>DNF</div>
+  else if (time === null) return <div>{data.Status}</div>
   else return <div>Data Unavailable</div>
 }
 
@@ -29,28 +46,13 @@ function formatTime({ data }) {
 function LastRaceStandingRow({ data }) {
   // Return a table row if data is fetched
   if (data) {
-    let textColor = null;
-    switch(data.position) {
-      case 1:
-        textColor = 'text-yellow-500';
-        break;
-      case 2: 
-        textColor = 'text-slate-400';
-        break;
-      case 3: 
-        textColor = 'text-amber-600';
-        break;
-      default:
-        textColor = '';
-    }
-
     // fastest lap code for reference: className={data.fastestLapRank === 1 ? 'text-purple-600' : ''}
     return (
-      <tr key={data.number} className={textColor}>
-        <td>{data.position}</td>
-        <td>{data.familyName}</td>
-        <td>{data.constructorName}</td>
-        <td>{data.points}</td>
+      <tr key={data.number} className="border-b-red-600 border-[1px] border-dashed">
+        <td>{data.ClassifiedPosition}</td>
+        <td>{data.Abbreviation}</td>
+        <td>{data.TeamName}</td>
+        <td>{data.Points}</td>
         <td>{formatTime({ data })}</td>
       </tr>
     )
@@ -65,36 +67,45 @@ function LastRaceStandingRow({ data }) {
 // component for last race results
 function LastRaceResults() {
   // useFetchData used to get data
-  let { data, isLoading } = useFetchData('/last-race-results')
-  
-  // reloading if data has not been fetched yet
-  if (isLoading) return <Loading />
+  const resultData = useFetchData("/results/2023/abudhabi/race") // TODO: Make this update automatically
+  const eventData = useFetchData("/event/2023/abudhabi/race")
 
+  const results = resultData.data;
+  const resultIsLoading = resultData.isLoading;
+  const resultsError = resultData.error;
+
+  const event = eventData.data;
+  const eventIsLoading = eventData.isLoading;
+  const eventError = eventData.error;
+
+  // reloading if data has not been fetched yet
+  if (resultIsLoading || eventIsLoading ) return <Loading />
   // Load the table with last race results when the data is fetched
   return (
-    <div className="box flex flex-col">
-      <div className="sticky top-0">
-        <h1 className="h1 h-1/6 mx-2">Last Race Results</h1>
+    <div className="w-1/2 border-black border-2 p-0">
+      <h1 className="sectionHeader bg-black py-1 text-center">Last Race Results</h1>
+      <div className="bg-red-600 text-white py-[.1875rem] text-center">
+        Last Race: {/*formatText({event}).trim()*/}
       </div>
-      <div className="h-5/6 overflow-y-auto mt-2 mx-2">
-        <table className="w-full">
-          <thead>
-            <tr>
-              <th>Place</th>
-              <th>Name</th>
-              <th>Team</th>
-              <th>Points</th>
-              <th>Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              data.map((result, index) => (
-                <LastRaceStandingRow key={index} data={result} />
-              ))
-            }
-          </tbody>
-        </table>
+      <div className="max-h-48 overflow-y-auto bg-white p-0 m-0">
+        <table className="w-full h-full text-xl">
+              <thead>
+              <tr className="">
+                  <th>Place</th>
+                  <th>Name</th>
+                  <th>Team</th>
+                  <th>Points</th>
+                  <th>Time</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                results.map((result, index) => (
+                  <LastRaceStandingRow key={index} data={result} />
+                ))
+              }
+              </tbody>
+          </table>
       </div>
     </div>
   )

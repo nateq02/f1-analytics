@@ -1,6 +1,6 @@
 import { NavBar } from "../components/NavBar"
 
-function Standings() {
+function Results() {
     return (
         <div className="font-default">
             <NavBar />
@@ -8,4 +8,4 @@ function Standings() {
     )
 }
 
-export { Standings }
+export { Results }

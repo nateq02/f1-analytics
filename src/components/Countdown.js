@@ -101,7 +101,7 @@ function Countdown({ data, isLoading }) {
 
     return (
         <div className='h-1/4 w-10/12 flex'>
-            <div className="h-full w-1/4 flex bg-black bg-cover border-black border-2">
+            <div className="h-full w-1/4 flex bg-black bg-cover border-black border-2 ">
                 <img src={verHamPic} className="w-full opacity-90"></img>
                 <div className="absolute w-1/6 mx-8">
                     <h1 className='sectionHeader mt-2 text-center text-wrap'>Countdown to Race Weekend</h1>

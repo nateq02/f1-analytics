@@ -32,40 +32,13 @@ function UpcomingEventsRow({ event }) {
 }
 function UpcomingEvents({ data, isLoading }) {
     // if data has not been loaded yet, indicate it
-    if (isLoading) {
-        return (
-            <Loading />
-        )
-    }
+    if (isLoading) return <Loading />
 
     return (
         <>
-        {/*<div className="box flex flex-col">
-            <div className="sticky top-0">
-                <h1 className="h1 h-1/6 mx-2">Upcoming Events</h1>
-            </div>
-            <div className="h-5/6 overflow-y-auto mt-2 mx-2">
-                <table className="w-full">
-                    <thead>
-                        <tr>
-                            <th>Event</th>
-                            <th>Start Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            /*data.map((event, index) => (
-                                <UpcomingEventsRow key={index} event={event} />
-                            ))
-                            <UpcomingEventsRow event={data} />
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>*/}
         <div className="h-1/5 w-10/12 flex">
-            <div className="h-full w-1/4 flex border-black border-2">
-                <img src={raceStart} className="w-full opacity-90"></img>
+            <div className="h-full w-1/4 flex bg-black border-black border-2">
+                <img src={raceStart} className="w-full opacity-80"></img>
                 <div className="absolute w-1/6 mx-8">
                     <h1 className="sectionHeader mt-2 text-center text-wrap">Upcoming Schedule</h1>
                 </div>
@@ -80,8 +53,8 @@ function UpcomingEvents({ data, isLoading }) {
                     </thead>
                     <tbody>
                         {
-                            data.map((event) => (
-                                <UpcomingEventsRow event={event} />
+                            data.map((event, index) => (
+                                <UpcomingEventsRow key={index} event={event} />
                             ))
                         }
                     </tbody>

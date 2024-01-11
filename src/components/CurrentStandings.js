@@ -9,7 +9,7 @@ function DriverStandingRow({ driver }) {
 if (driver){
 // Return a table row with position, name, constructor, points
 return (
-<tr key={driver.driverId}>
+<tr key={driver.driverId} className="border-b-red-600 border-[1px] border-dashed">
     <td>{driver.position}</td>
     <td>{driver.givenName} {driver.familyName}</td>
     <td>{driver.constructorNames}</td>
@@ -30,7 +30,7 @@ function ConstructorStandingRow({ constr }) {
     if (constr){
       // Return a table row with position, name, constructor, points
       return (
-      <tr key={constr.constructorId}>
+      <tr key={constr.constructorId} className="border-b-red-600 border-[1px] border-dashed">
         <td>{constr.position}</td>
         <td>{constr.constructorName}</td>
         <td>{constr.points}</td>
@@ -51,9 +51,6 @@ function CurrentStandings() {
         setSelected(option);
     }
 
-    const driverButton = document.getElementById('driverStandingSelect');
-    const constructorButton = document.getElementById('constructorStandingSelect');
-
     // driverButton.addEventListener('click', () => {
     //     setSelected('driver');
     // })
@@ -72,17 +69,20 @@ function CurrentStandings() {
     const constructorStandings = constructorData.data;
     const constructorIsLoading = constructorData.isLoading;
 
-    if ((driverIsLoading === true) || (constructorIsLoading === true)) return <Loading />
+    if ((driverIsLoading) || (constructorIsLoading === true)) return <Loading />
 
     return (
-        <div className="w-5/12 border-black border-2">
+        <div className="w-1/2 border-black border-2">
             <h1 className="sectionHeader bg-black py-1 text-center">Standings</h1>
             <div className="flex justify-center gap-20 bg-red-600 text-white py-0.5">
-                <button className={`w-1/4 ${selected === 'driver' ? 'text-black bg-white border-black border-[1px]': ''}`} onClick={() => toggle('driver')}>Driver</button>
-                <button className={`w-1/4 ${selected === 'constructor' ? 'text-black bg-white border-black border-[1px]': ''}`} onClick={() => toggle('constructor')}>Constructor</button>
+                <button className={`w-1/4 hover:shadow-inner
+                ${selected === 'driver' ? 'text-black bg-white border-black border-[1px]': ''}`} 
+                    onClick={() => toggle('driver')}>Driver</button>
+                <button className={`w-1/4 ${selected === 'constructor' ? 'text-black bg-white border-black border-[1px]': ''}`} 
+                    onClick={() => toggle('constructor')}>Constructor</button>
             </div>
             <div className="max-h-48 overflow-y-auto bg-white">
-                <table id="driverStandings" className={`w-full text-xl ${selected === 'driver' ? '' : 'hidden'}`}>
+                <table id="driverStandings" className={`h-full w-full text-xl ${selected === 'driver' ? '' : 'hidden'}`}>
                     <thead>
                     <tr>
                         <th>Place</th>
@@ -99,7 +99,7 @@ function CurrentStandings() {
                     }
                     </tbody>
                 </table>
-                <table id="constructorStandings" className={`w-full text-xl ${selected === 'constructor' ? '' : 'hidden'}`}>
+                <table id="constructorStandings" className={`h-full w-full text-xl ${selected === 'constructor' ? '' : 'hidden'}`}>
                     <thead>
                     <tr>
                         <th>Place</th>

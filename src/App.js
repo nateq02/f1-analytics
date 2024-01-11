@@ -3,14 +3,14 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import routes from "./routes"
 import { Home } from "./pages/Home"
-import { Standings } from "./pages/Standings"
+import { Results } from "./pages/Results"
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/standings" element={<Standings />} />
+        <Route path="/results" element={<Results />} />
       </Routes>
     </BrowserRouter>
   );
