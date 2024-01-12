@@ -48,7 +48,7 @@ function Home () {
   const isLoading=false;
 
   return (
-    <div className="font-default">
+    <div className="font-default m-0">
       <NavBar />
       <div className="flex flex-col flex-wrap justify-center content-center gap-x-5 gap-y-8 h-[90vh] bg-gray-300">
         <Countdown data={data[0]} isLoading={isLoading}/> {/*Added the [0] for the dummy data*/}

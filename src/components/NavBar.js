@@ -8,8 +8,8 @@ function NavBar() {
                 <Link to="/">
                     <Logo />
                 </Link>
-                <Link to="/standings" className="h1 hover:underline">
-                    Standings
+                <Link to="/results" className="h1 hover:underline">
+                    Results
                 </Link>
             </div>
         </nav>

@@ -36,14 +36,14 @@ function UpcomingEvents({ data, isLoading }) {
 
     return (
         <>
-        <div className="h-1/5 w-10/12 flex">
-            <div className="h-full w-1/4 flex bg-black border-black border-2">
+        <div className="h-1/5 w-10/12 flex border-black border-2 rounded-lg shadow-lg">
+            <div className="h-full w-1/4 flex bg-black rounded-l-lg">
                 <img src={raceStart} className="w-full opacity-80"></img>
                 <div className="absolute w-1/6 mx-8">
                     <h1 className="sectionHeader mt-2 text-center text-wrap">Upcoming Schedule</h1>
                 </div>
             </div>
-            <div className="border-black border-2 border-l-0 w-3/4 bg-white flex justify-between overflow-y-auto">
+            <div className="border-l-black border-l-2 w-3/4 bg-white flex justify-between overflow-y-auto rounded-r-lg">
                 <table className="w-full table-auto mt-2">
                     <thead>
                         <tr>

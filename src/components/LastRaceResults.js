@@ -82,12 +82,12 @@ function LastRaceResults() {
   if (resultIsLoading || eventIsLoading ) return <Loading />
   // Load the table with last race results when the data is fetched
   return (
-    <div className="w-1/2 border-black border-2 p-0">
-      <h1 className="sectionHeader bg-black py-1 text-center">Last Race Results</h1>
+    <div className="flex flex-col w-1/2 border-black border-2 p-0 rounded-lg shadow-lg">
+      <h1 className="sectionHeader bg-black py-1 text-center rounded-t">Last Race Results</h1>
       <div className="bg-red-600 text-white py-[.1875rem] text-center">
-        Last Race: {/*formatText({event}).trim()*/}
+        Last Race: {formatText({event}).trim()}
       </div>
-      <div className="max-h-48 overflow-y-auto bg-white p-0 m-0">
+      <div className="overflow-y-auto bg-white p-0 m-0 rounded-b-lg">
         <table className="w-full h-full text-xl">
               <thead>
               <tr className="">

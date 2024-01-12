@@ -72,16 +72,21 @@ function CurrentStandings() {
     if ((driverIsLoading) || (constructorIsLoading === true)) return <Loading />
 
     return (
-        <div className="w-1/2 border-black border-2">
-            <h1 className="sectionHeader bg-black py-1 text-center">Standings</h1>
+        <div className="flex flex-col w-1/2 border-black border-2 rounded-lg shadow-lg">
+            <h1 className="sectionHeader bg-black py-1 text-center rounded-t">Standings</h1>
             <div className="flex justify-center gap-20 bg-red-600 text-white py-0.5">
-                <button className={`w-1/4 hover:shadow-inner
-                ${selected === 'driver' ? 'text-black bg-white border-black border-[1px]': ''}`} 
-                    onClick={() => toggle('driver')}>Driver</button>
-                <button className={`w-1/4 ${selected === 'constructor' ? 'text-black bg-white border-black border-[1px]': ''}`} 
-                    onClick={() => toggle('constructor')}>Constructor</button>
+                <button className={`w-1/4 rounded-lg
+                    ${selected === 'driver' ? 'text-black bg-white border-black border-[1px]': 'hover:bg-white hover:text-black hover:border-black hover-border-[1px]'}`} 
+                    onClick={() => toggle('driver')}>
+                        Driver
+                </button>
+                <button className={`w-1/4 rounded-lg 
+                    ${selected === 'constructor' ? 'text-black bg-white border-black border-[1px]': 'hover:bg-white hover:text-black hover:border-black hover-border-[1px]'}`} 
+                    onClick={() => toggle('constructor')}>
+                        Constructor
+                </button>
             </div>
-            <div className="max-h-48 overflow-y-auto bg-white">
+            <div className=" overflow-y-auto bg-white rounded-b-lg">
                 <table id="driverStandings" className={`h-full w-full text-xl ${selected === 'driver' ? '' : 'hidden'}`}>
                     <thead>
                     <tr>
