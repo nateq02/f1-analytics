@@ -16,7 +16,7 @@
 }
 
 .subtext {
-    @apply text-2xl italic ml-7
+    @apply text-2xl ml-7
 }
 
 .countdownText {

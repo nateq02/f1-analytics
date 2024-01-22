@@ -23,7 +23,7 @@ const useFetchData = (path) => {
     useEffect(() => {
         // Function to actually fetch the data
         const fetchData = async () => {
-            // Try catch to catch errors
+            // Try-catch to catch errors
             try {
                 setIsLoading(true);
                 // Actually get the data

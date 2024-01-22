@@ -43,10 +43,10 @@ function Countdown({ data, isLoading }) {
     let [seconds, setSeconds] = useState(null);
 
     // Will set data to an empty string if it hasn't loaded quite yet
-    // const next_event = data ? data[0] : "";
-    const next_event = data;
+    const next_event = data ? data[0] : "";
+    //const next_event = data;
     // Getting next event, formatting the string with proper capitalization
-    let next_event_name = String(next_event.OfficialEventName);
+    let next_event_name = String(next_event.EventName);
     const next_event_name_words = next_event_name.split(" ");
     for (let i = 0; i < next_event_name_words.length; i++) {
         next_event_name_words[i] = next_event_name_words[i].charAt(0) + next_event_name_words[i].substr(1).toLowerCase();
@@ -107,11 +107,11 @@ function Countdown({ data, isLoading }) {
                     <h1 className='sectionHeader mt-2 text-center text-wrap'>Countdown to Race Weekend</h1>
                 </div>
             </div>
-            <div className="border-l-black border-l-2 w-3/4 bg-white flex justify-between rounded-r-lg">
+            <div className="border-l-black border-l-2 w-3/4 bg-white flex justify-between items-center rounded-r-lg">
                 <div className="w-1/3">
-                    <h2 className="subheading mt-2">Next Event</h2>
+                    <h2 className="subheading">Next Event:</h2>
                     <p className="subtext">{next_event_name}</p>
-                    <h2 className="subheading mt-2">Next Session</h2>
+                    <h2 className="subheading mt-2">Next Session:</h2>
                     <p className="subtext">{nextName}</p>
                 </div>
                 <div className="w-1/2 border-black flex justify-between mr-20">

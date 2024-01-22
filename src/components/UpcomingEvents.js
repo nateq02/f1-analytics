@@ -7,7 +7,7 @@ function UpcomingEventsRow({ event }) {
     // if an event is loaded (not null) ...
     if (event) {
         // get upcoming event name from the event prop
-        const next_event_name = String(event.OfficialEventName);
+        const next_event_name = String(event.EventName);
         const next_event_name_words = next_event_name.split(" ");
 
         // convert upcoming event name to proper format
