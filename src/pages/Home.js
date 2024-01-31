@@ -18,18 +18,21 @@ function Box() {
 
 function Home () {
   // Fetch the data and destructure it
-  const { data, isLoading } = useFetchData('/next');
+  const { data, isLoading, error } = useFetchData("/next");
+
+  if (isLoading) return null
 
   return (
     <div className="font-default m-0">
       <NavBar />
       <div className="flex flex-col flex-wrap justify-center content-center gap-x-5 gap-y-8 h-[90vh] bg-gray-300">
-        <Countdown data={data} isLoading={isLoading}/> {/*Added the [0] for the dummy data*/}
+        {/*<Countdown data={data} isLoading={isLoading}/> {/*Added the [0] for the dummy data*/}
         <div className="flex justify-evenly gap-x-8 max-h-72">
-          <CurrentStandings />
-          <LastRaceResults /> 
+          {/*<CurrentStandings />*/}
+          {/*<LastRaceResults /> */}
         </div>
-        <UpcomingEvents data={data} isLoading={isLoading}/>
+        {/*<UpcomingEvents data={data} isLoading={isLoading}/>*/}
+        {console.log(data)}
       </div>
     </div>
   )

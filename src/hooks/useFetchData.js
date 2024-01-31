@@ -30,10 +30,8 @@ const useFetchData = (path) => {
                 const response = await axios.get(url+path);
                 // Only need the data part of the response/promise
                 const responseData = await response.data
-                // Convert the data into JSON from a string
-                const jsonData = JSON.parse(responseData);
-                // Set state of data to the JSON data
-                setData(jsonData);
+                // Set state of data to the responseData
+                setData(responseData);
             }
             // Catch any errors and log them --> probably a better way to handle this
             catch (e) {
