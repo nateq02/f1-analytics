@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-//import { Logo, Box, Countdown } from './App';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 

@@ -1,6 +1,5 @@
 import { format } from 'mathjs';
 import { useFetchData } from '../hooks/useFetchData'
-import { useLastEvent } from '../hooks/useLastEvent';
 import { Loading } from './Loading'
 
 function formatText( {event} ) {
@@ -25,10 +24,10 @@ function formatTime({ data }) {
   const time = data.Time;
 
   if (time && data.ClassifiedPosition === '1') {
-    const hours = Math.floor(time / (1000 * 60 * 60));
-    const mins = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((time % (1000 * 60)) / 1000);
-    const ms = time % 1000;
+    const hours = Math.floor(time / (60 * 60));
+    const mins = Math.floor((time % (60 * 60)) / (60));
+    const secs = Math.floor((time % (60)));
+    const ms = Math.floor((time * 1000) % 1000);
 
     const formattedTime = `${hours}:${mins < 10 ? `0${mins}`: `${mins}`}:${secs < 10 ? `0${secs}`: `${secs}`}.${ms}`
     return formattedTime;
@@ -36,7 +35,7 @@ function formatTime({ data }) {
 
   // Times for drivers not in first are given as interval to first place
   else if (time && data.position !== '1'){
-    return `+ ${time/1000}`;
+    return `+ ${time}`;
   }
 
   else if (time === null) return <div>{data.Status}</div>
@@ -68,24 +67,15 @@ function LastRaceStandingRow({ data }) {
 // component for last race results
 function LastRaceResults() {
   // useFetchData used to get data
-  const resultData = useFetchData("/results/2023/abudhabi/race") // TODO: Make this update automatically
-  const eventData = useFetchData("/event/2023/abudhabi/race")
-
-  console.log(useLastEvent())
-  
-  const results = resultData.data;
-  const resultIsLoading = resultData.isLoading;
-  const resultsError = resultData.error;
+  const eventData = useFetchData("/last-event");
 
   const event = eventData.data;
   const eventIsLoading = eventData.isLoading;
   const eventError = eventData.error;
 
-  // reloading if data has not been fetched yet
-  if (resultIsLoading || eventIsLoading ) return <Loading />
+  if (eventIsLoading ) return <Loading />
   // Load the table with last race results when the data is fetched
   return (
-    
     <div className="flex flex-col w-1/2 border-black border-2 p-0 rounded-lg shadow-lg">
       <h1 className="sectionHeader bg-black py-1 text-center rounded-t">Last Race Results</h1>
       <div className="bg-red-600 text-white py-[.1875rem] text-center">
@@ -104,8 +94,8 @@ function LastRaceResults() {
               </thead>
               <tbody>
               {
-                results.map((result, index) => (
-                  <LastRaceStandingRow key={index} data={result} />
+                event.RaceResult.map((raceResult, index) => (
+                  <LastRaceStandingRow key={index} data={raceResult} />
                 ))
               }
               </tbody>
@@ -113,6 +103,7 @@ function LastRaceResults() {
       </div>
     </div>
   )
+  // console.log(event)
 }
 
 export { LastRaceResults }

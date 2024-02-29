@@ -46,22 +46,13 @@ function ConstructorStandingRow({ constr }) {
 
 function CurrentStandings() {
     const [selected, setSelected] = useState("driver");
-
+    const curr_year = new Date().getFullYear();
     const toggle = (option) =>{
         setSelected(option);
     }
 
-    // driverButton.addEventListener('click', () => {
-    //     setSelected('driver');
-    // })
-
-    // constructorButton.addEventListener('click', () => {
-    //     setSelected('constructor');
-    // })
-
-    // Logic to fetch the data
-    const driverData = useFetchData("/driver-standings");
-    const constructorData = useFetchData("/constructor-standings");
+    const driverData = useFetchData("/driver-standings/current");
+    const constructorData = useFetchData("/constructor-standings/current");
 
     const driverStandings = driverData.data;
     const driverIsLoading = driverData.isLoading;
@@ -69,7 +60,7 @@ function CurrentStandings() {
     const constructorStandings = constructorData.data;
     const constructorIsLoading = constructorData.isLoading;
 
-    if ((driverIsLoading) || (constructorIsLoading === true)) return <Loading />
+    if (driverIsLoading || constructorIsLoading) return <Loading />
 
     return (
         <div className="flex flex-col w-1/2 border-black border-2 rounded-lg shadow-lg">
