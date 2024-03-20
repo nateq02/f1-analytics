@@ -7,13 +7,13 @@ import { useState } from 'react';
 function DriverStandingRow({ driver }) {
 // If data is not None i.e. data is retrieved
 if (driver){
-// Return a table row with position, name, constructor, points
+// Return a table row with position, na className="py-1me, constructor, points
 return (
-<tr key={driver.driverId} className="border-b-red-600 border-[1px] border-dashed">
-    <td>{driver.position}</td>
-    <td>{driver.givenName} {driver.familyName}</td>
-    <td>{driver.constructorNames}</td>
-    <td>{driver.points}</td>
+<tr key={driver.driverId} className="border-b-red-600 border-b-[1px] border-dashed">
+    <td className="py-1">{driver.position}</td>
+    <td className="py-1">{driver.givenName} {driver.familyName}</td>
+    <td className="py-1">{driver.constructorNames}</td>
+    <td className="py-1">{driver.points}</td>
 </tr>
 );
 }
@@ -30,10 +30,10 @@ function ConstructorStandingRow({ constr }) {
     if (constr){
       // Return a table row with position, name, constructor, points
       return (
-      <tr key={constr.constructorId} className="border-b-red-600 border-[1px] border-dashed">
-        <td>{constr.position}</td>
-        <td>{constr.constructorName}</td>
-        <td>{constr.points}</td>
+      <tr key={constr.constructorId} className="border-b-red-600 border-b-[1px] border-dashed">
+        <td className="py-1">{constr.position}</td>
+        <td className="py-1">{constr.constructorName}</td>
+        <td className="py-1">{constr.points}</td>
       </tr>
     );
   }
@@ -77,8 +77,8 @@ function CurrentStandings() {
                         Constructor
                 </button>
             </div>
-            <div className=" overflow-y-auto bg-white rounded-b-lg">
-                <table id="driverStandings" className={`h-full w-full text-xl ${selected === 'driver' ? '' : 'hidden'}`}>
+            <div className="overflow-y-auto bg-white rounded-b-lg flex justify-center">
+                <table id="driverStandings" className={`h-full w-[95%] text-xl ${selected === 'driver' ? '' : 'hidden'}`}>
                     <thead>
                     <tr>
                         <th>Place</th>
@@ -95,7 +95,7 @@ function CurrentStandings() {
                     }
                     </tbody>
                 </table>
-                <table id="constructorStandings" className={`h-full w-full text-xl ${selected === 'constructor' ? '' : 'hidden'}`}>
+                <table id="constructorStandings" className={`h-full w-[95%] text-xl ${selected === 'constructor' ? '' : 'hidden'}`}>
                     <thead>
                     <tr>
                         <th>Place</th>

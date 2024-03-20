@@ -19,52 +19,35 @@ import toroRossoLogo from '../imgs/small-logos/tororosso.png'
 import sauberLogo from '../imgs/small-logos/sauber.png';
 import forceIndiaLogo from '../imgs/small-logos/forceindia.png';
 
+const teamLogos = {
+    'Alpine': alpineLogo,
+    'Aston Martin': astonLogo,
+    'Ferrari': ferrariLogo,
+    'Haas F1 Team': haasLogo,
+    'McLaren': mclarenLogo,
+    'Mercedes': mercedesLogo,
+    'Red Bull Racing': redBullLogo,
+    'RB': rbLogo,
+    'Williams': williamsLogo,
+    'Kick Sauber': kickLogo,
+    'AlphaTauri': alphaTauriLogo,
+    'Alfa Romeo': alfaRomeoLogo,
+    'Alfa Romeo Racing': alfaRomeoLogo,
+    'Racing Point': racingPointLogo,
+    'Renault': renaultLogo,
+    'Toro Rosso': toroRossoLogo,
+    'Sauber': sauberLogo,
+    'Force India': forceIndiaLogo
+}
+
 function getTeamLogo(teamName) {
-    switch (teamName){
-        case 'Alpine':
-            return alpineLogo;
-        case 'Aston Martin':
-            return astonLogo;
-        case 'Ferrari':
-            return ferrariLogo;
-        case 'Haas F1 Team':
-            return haasLogo;
-        case 'McLaren':
-            return mclarenLogo;
-        case 'Mercedes':
-            return mercedesLogo;
-        case 'Red Bull Racing':
-            return redBullLogo;
-        case 'RB':
-            return rbLogo;
-        case 'Williams':
-            return williamsLogo;
-        case 'Kick Sauber': 
-            return kickLogo;
-        case 'AlphaTauri':
-            return alphaTauriLogo;
-        case 'Alfa Romeo':
-        case 'Alfa Romeo Racing':
-            return alfaRomeoLogo;
-        case 'Racing Point':
-            return racingPointLogo;
-        case 'Renault':
-            return renaultLogo;
-        case 'Toro Rosso':
-            return toroRossoLogo;
-        case 'Sauber':
-            return sauberLogo;
-        case 'Force India':
-            return forceIndiaLogo;
-        default:
-            return null;
-    }
+    return teamLogos[teamName] || null;
 }
 
 function RaceResultRow({ driver }) {
     if (driver){
         return (
-            <tr key={driver.Abbreviation} className="border-b-red-600 border-b-[1px] shadow-sm">
+            <tr key={driver.Abbreviation} className="border-b-red-600 border-b-[1px] shadow-sm last:border-b-0">
                 <td className="py-2">{driver.ClassifiedPosition}</td>
                 <td className="py-2">{driver.FullName}</td>
                 <td className="py-2 flex justify-center items-center">
@@ -95,7 +78,7 @@ function formatQualifyingTime({ time }) {
 function QualifyingResultRow({ driver }) {
     if (driver) {
         return (
-            <tr key={driver.Abbreviation} className="border-b-red-600 border-b-[1px] shadow-sm">
+            <tr key={driver.Abbreviation} className="border-b-red-600 border-b-[1px] shadow-sm last:border-b-0">
                 <td className="py-2">{driver.Position}</td>
                 <td className="py-2">{driver.FullName}</td>
                 <td className="py-2 flex justify-center items-center">
@@ -110,8 +93,9 @@ function QualifyingResultRow({ driver }) {
     }
 }
 
-const ResultBody = ({ selectedYear, selectedCircuit, selectedSession }) => {
+function ResultBody({ selectedYear, selectedCircuit, selectedSession }) {
     const [eventData, setEventData] = useState(null);
+    
     useEffect(() => {
         const fetchEventData = async () => {
             if (selectedYear && selectedCircuit){
@@ -121,7 +105,8 @@ const ResultBody = ({ selectedYear, selectedCircuit, selectedSession }) => {
                     setEventData(event);
                 }
                 catch (error) {
-                    console.log(error)
+                    console.log(error);
+                    return null;
                 }    
             }
         }
@@ -140,7 +125,7 @@ const ResultBody = ({ selectedYear, selectedCircuit, selectedSession }) => {
             case 'Qualifying':
                 resultArr = eventData.QualifyingResult;
                 break;
-            case 'Race':
+            default:
                 resultArr = eventData.RaceResult;
                 break;
         }

@@ -11,6 +11,9 @@ function NavBar() {
                 <Link to="/results" className="h1 hover:underline">
                     Results
                 </Link>
+                <Link to="/standings" className="h1 hover:underline">
+                    Standings
+                </Link>
             </div>
         </nav>
     )

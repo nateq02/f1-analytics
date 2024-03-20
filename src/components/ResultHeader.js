@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useFetchData } from '../hooks/useFetchData'
 import { Loading } from './Loading'
 import axios from 'axios'
@@ -7,13 +7,16 @@ function YearFilter({ selectedYear, onChange }) {
     const startYear = 2018;
     const endYear = new Date().getFullYear();
 
-    const years = [];
-    for (let year = startYear; year <= endYear; year++){
-        years.push(year);
-    }
+    const years = useMemo(() => {
+        const tempYears = [];
+        for (let year = startYear; year <= endYear; year++){
+            tempYears.push(year);
+        }
+        return tempYears;
+    }, [startYear, endYear]);
 
     return(
-        <select name="year" id="year" value={selectedYear} onChange ={(e) => onChange(e.target.value)} className="rounded-lg px-4">
+        <select name="resultYear" id="resultYear" value={selectedYear} onChange ={(e) => onChange(e.target.value)} className="rounded-lg px-4">
             {years.map((year) => 
                 <option key={year} value={year}>
                     {year}
@@ -46,7 +49,7 @@ function CircuitFilter({ selectedYear, selectedCircuit, onChange }) {
     }
 
     return (
-        <select name="circuit" id="circuit" value={selectedCircuit} onChange={(e) => onChange(e.target.value)} className="rounded-lg px-4">
+        <select name="resultCircuit" id="resultCircuit" value={selectedCircuit} onChange={(e) => onChange(e.target.value)} className="rounded-lg px-4">
             {circuit_arr.map((circuit) =>
                 <option key={circuit} value={circuit}>
                     {circuit}
@@ -56,16 +59,13 @@ function CircuitFilter({ selectedYear, selectedCircuit, onChange }) {
 }
 
 function SessionFilter({ selectedYear, selectedCircuit, selectedSession, onChange }) {
-    const [eventData, setEventData] = useState([]);
     const [sessionArr, setSessionArr] = useState([]);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchSessionList = async () => {
             try {
                 const response = await axios.get(`http://127.0.0.1:8000/event/${selectedYear}/${selectedCircuit}`);
                 const session_list = response.data;
-                setEventData(session_list);
 
                 if (session_list) {
                     const newSessionArr = [];
@@ -85,14 +85,14 @@ function SessionFilter({ selectedYear, selectedCircuit, selectedSession, onChang
                 }
             }
             catch (e) {
-                setError(e);
+                console.log(e);
             }
         }
         fetchSessionList();
     }, [selectedYear, selectedCircuit])
 
     return (
-        <select name="session" id="session" value={selectedSession} onChange={(e) => onChange(e.target.value)} className="rounded-lg px-4">
+        <select name="resultSession" id="resultSession" value={selectedSession} onChange={(e) => onChange(e.target.value)} className="rounded-lg px-4">
             {sessionArr.map((session) =>
                 <option key={session} value={session}>
                     {session}
@@ -101,11 +101,8 @@ function SessionFilter({ selectedYear, selectedCircuit, selectedSession, onChang
     )
 }
 
-function ResultHeader({ selectedYear, selectedCircuit, selectedSession, 
-    onYearChange, onCircuitChange, onSessionChange}) {
-    // const [selectedYear, setSelectedYear] = useState('');
-    // const [selectedCircuit, setSelectedCircuit] = useState('');
-    // const [selectedSession, setSelectedSession] = useState('');
+function ResultHeader({ selectedYear, selectedCircuit, selectedSession, loading,
+    onYearChange, onCircuitChange, onSessionChange, setLoading}) {
 
     const lastEvent = useFetchData('/last-event');
     const lastEventData = lastEvent ? lastEvent.data : null;
@@ -121,6 +118,7 @@ function ResultHeader({ selectedYear, selectedCircuit, selectedSession,
             onYearChange(lastEventYear);
             onCircuitChange(lastCircuit);
             onSessionChange(lastSession);
+            setLoading(false);
         }
     }, [lastEventData])
 
@@ -136,7 +134,7 @@ function ResultHeader({ selectedYear, selectedCircuit, selectedSession,
         onSessionChange(session);
     }
 
-    if (selectedYear === '' || selectedCircuit === '' || selectedSession === '') return <Loading />
+    if (loading) return <Loading />
 
     return (
         <div className="w-full">

@@ -48,12 +48,12 @@ function LastRaceStandingRow({ data }) {
   if (data) {
     // fastest lap code for reference: className={data.fastestLapRank === 1 ? 'text-purple-600' : ''}
     return (
-      <tr key={data.number} className="border-b-red-600 border-[1px] border-dashed">
-        <td>{data.ClassifiedPosition}</td>
-        <td>{data.Abbreviation}</td>
-        <td>{data.TeamName}</td>
-        <td>{data.Points}</td>
-        <td>{formatTime({ data })}</td>
+      <tr key={data.number} className="border-b-red-600 border-b-[1px] border-dashed">
+        <td className="py-1">{data.ClassifiedPosition}</td>
+        <td className="py-1">{data.Abbreviation}</td>
+        <td className="py-1">{data.TeamName}</td>
+        <td className="py-1">{data.Points}</td>
+        <td className="py-1">{formatTime({ data })}</td>
       </tr>
     )
   }
@@ -81,16 +81,16 @@ function LastRaceResults() {
       <div className="bg-red-600 text-white py-[.1875rem] text-center">
         Last Race: {formatText({event}).trim()}
       </div>
-      <div className="overflow-y-auto bg-white p-0 m-0 rounded-b-lg">
-        <table className="w-full h-full text-xl">
+      <div className="overflow-y-auto bg-white p-0 m-0 rounded-b-lg flex justify-center">
+        <table className="w-[95%] h-full text-xl">
               <thead>
-              <tr className="">
-                  <th>Place</th>
-                  <th>Name</th>
-                  <th>Team</th>
-                  <th>Points</th>
-                  <th>Time</th>
-              </tr>
+                <tr className="">
+                    <th>Place</th>
+                    <th>Name</th>
+                    <th>Team</th>
+                    <th>Points</th>
+                    <th>Time</th>
+                </tr>
               </thead>
               <tbody>
               {

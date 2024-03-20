@@ -6,6 +6,7 @@ import verHamPic from '../imgs/ham-ver-pic.png';
 - Need to add a useEffect that will get next event when one has passed
 - Break down component into smaller components
 */
+
 function getNextSession(next_event, session_dict) {
     // Gets current date
     const curr_date_time = new Date();
