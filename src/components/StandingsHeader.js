@@ -1,6 +1,5 @@
-import { useState, useEffect, useMemo } from 'react';
-import { useFetchData } from '../hooks/useFetchData';
-import { Loading } from './Loading';
+import { useMemo } from 'react';
+import { Loading } from './Loading'
 
 function YearFilter({ selectedYear, onChange }) {
     const startYear = 2018;

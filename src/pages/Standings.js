@@ -4,10 +4,12 @@ import { StandingsHeader } from '../components/StandingsHeader'
 import { StandingsBody } from '../components/StandingsBody'
 
 function Standings() {
+    // Sets state with default values to use
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedStandings, setSelectedStandings] = useState('Driver');
     const [loading, setLoading] = useState(true);
     
+    // Functions used to handle changes in the states
     const handleYearChange = useCallback((year) => {
         setSelectedYear(year);
     },[])

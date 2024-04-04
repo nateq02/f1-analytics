@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { formatTime } from './LastRaceResults';
-import { useFetchData } from '../hooks/useFetchData';
 import axios from 'axios';
 import alpineLogo from '../imgs/small-logos/alpine.png';
 import astonLogo from '../imgs/small-logos/aston.png';
@@ -20,6 +18,7 @@ import toroRossoLogo from '../imgs/small-logos/tororosso.png'
 import sauberLogo from '../imgs/small-logos/sauber.png';
 import forceIndiaLogo from '../imgs/small-logos/forceindia.png';
 
+// An object to match team names with their logos
 const teamLogos = {
     'Alpine F1 Team': alpineLogo,
     'Aston Martin': astonLogo,
@@ -41,6 +40,8 @@ const teamLogos = {
     'Force India': forceIndiaLogo
 }
 
+// function to get the corresponding team logo from the object 
+    // Special handling as Sauber is a team name for two distinct logos
 function getTeamLogo(teamName, year) {
     if (year === 2024) {
         if (teamName === 'Sauber'){
@@ -50,16 +51,13 @@ function getTeamLogo(teamName, year) {
     return teamLogos[teamName] || null;
 }
 
+// Component for an individual row in the table if driver standings is selected
 function DriverStandingRow({ record }) {
     if (record) {
         return (
             <tr key={record.driverId} className="border-b-red-600 border-b-[1px] shadow-sm last:border-b-0">
                 <td className="py-2">{record.position}</td>
                 <td className="py-2">{record.givenName + " " + record.familyName}</td>
-                {/* <td className="py-2 flex justify-center items-center">
-                    <img src={getTeamLogo(record.constructorNames[0], record.year)} alt={record.constructorNames[-1] + ' Logo'} className="h-8 mr-3"/>
-                    {record.constructorNames[0]}
-                </td> */}
                 <td className="py-2 flex justify-center items-center">
                 {record.constructorNames && record.constructorNames[0] && (
                     <>
@@ -67,7 +65,7 @@ function DriverStandingRow({ record }) {
                         {record.constructorNames[0]}
                     </>
                 )}
-</td>
+                </td>
                 <td className="py-2">{record.points}</td>
                 <td className="py-2">{record.wins}</td>
             </tr>
@@ -75,6 +73,7 @@ function DriverStandingRow({ record }) {
     }
 }
 
+// Component for an individual row in the table if constructor standings is selected
 function ConstructorStandingRow({ record }) {
     if (record) {
         return (
@@ -91,12 +90,15 @@ function ConstructorStandingRow({ record }) {
     }
 }
 
+// Component with the standing table for the selected year and standing type
 function StandingsBody({ selectedYear, selectedStandings }) {
     const [standingData, setStandingData] = useState(null);
 
+    // fetch standings data
     useEffect(() => {
         const fetchEventData = async () => {
             try{
+                // fetch the standings data for the corresponding year and standing type (driver or constructor)
                 if (selectedStandings === 'Driver') {
                     const response = await axios.get(`http://127.0.0.1:8000/driver-standings/${selectedYear}`);
                     const standings = response.data;
@@ -117,7 +119,7 @@ function StandingsBody({ selectedYear, selectedStandings }) {
         fetchEventData();
     }, [selectedYear, selectedStandings])
 
-    console.log(standingData)
+    // If the selected standings is driver, show the driver standings
     if (standingData && selectedStandings === 'Driver') {
         return (
             <div className="h-70 mt-4 border-black border-[1px] rounded-lg flex justify-center">
@@ -139,6 +141,7 @@ function StandingsBody({ selectedYear, selectedStandings }) {
         )
     }
 
+    // If the selected standings are constructor, show constructor standings
     else if (standingData && selectedStandings === 'Constructor') {
         return (
             <div className="h-70 mt-4 border-black border-[1px] rounded-lg flex justify-center">
@@ -159,6 +162,7 @@ function StandingsBody({ selectedYear, selectedStandings }) {
         )
     }
 
+    // If anything else, there was an error in fetching the data
     else {
         <div className="text-2xl flex flex-col justify-center items-center mt-5 border-black border-[1px] rounded-lg p-3">
             <p>Error in fetching the data</p>

@@ -19,6 +19,7 @@ import toroRossoLogo from '../imgs/small-logos/tororosso.png'
 import sauberLogo from '../imgs/small-logos/sauber.png';
 import forceIndiaLogo from '../imgs/small-logos/forceindia.png';
 
+// An object to store team names and their corresponding logos
 const teamLogos = {
     'Alpine': alpineLogo,
     'Aston Martin': astonLogo,
@@ -44,6 +45,7 @@ function getTeamLogo(teamName) {
     return teamLogos[teamName] || null;
 }
 
+// Component to format a row in the race results table
 function RaceResultRow({ driver }) {
     if (driver){
         return (
@@ -59,12 +61,14 @@ function RaceResultRow({ driver }) {
             </tr>
         )
     }
-
+    // If there is no data, output that no data is available
     else {
         return (<div>Data Unavailable</div>)
     }
 }
 
+// Formats qualifying time so that they are consistently formatted, returns "--" if no qualifying time exists for a driver
+    // Times are given in total seconds
 function formatQualifyingTime({ time }) {
     if (time){
         const min = Math.floor(time / 60);
@@ -75,6 +79,7 @@ function formatQualifyingTime({ time }) {
     else return '--'
 }
 
+// Component to store a row of qualifying results
 function QualifyingResultRow({ driver }) {
     if (driver) {
         return (
@@ -93,9 +98,12 @@ function QualifyingResultRow({ driver }) {
     }
 }
 
+// Result body component that contains a table of all the results for the given year, circuit, and session
 function ResultBody({ selectedYear, selectedCircuit, selectedSession }) {
     const [eventData, setEventData] = useState(null);
     
+    // Fetches event data for the particular year and circuit
+        // Fetched everytime year, circuit, or session is changed in the filter
     useEffect(() => {
         const fetchEventData = async () => {
             if (selectedYear && selectedCircuit){
@@ -113,6 +121,7 @@ function ResultBody({ selectedYear, selectedCircuit, selectedSession }) {
         fetchEventData();
     }, [selectedYear, selectedCircuit, selectedSession])
     
+    // Gets the correct result type based on what is selected in the session filter
     let resultArr = [];
     if (eventData){
         switch (selectedSession) {
@@ -131,6 +140,7 @@ function ResultBody({ selectedYear, selectedCircuit, selectedSession }) {
         }
     }
 
+    // show the race results if there are results and the session is either "race" or "sprint" since they share the same format
     if (resultArr.length > 0 && (selectedSession === 'Race' || selectedSession === 'Sprint')) {
         return (
             <div className="h-70 mt-4 border-black border-[1px] rounded-lg flex justify-center">
@@ -152,6 +162,7 @@ function ResultBody({ selectedYear, selectedCircuit, selectedSession }) {
         )
     }
 
+    // Show the qualifying results if they exist and the selected session is "Sprint Shootout" or "Qualifying"
     else if (resultArr.length > 0 && (selectedSession === 'Sprint Shootout' || selectedSession === 'Qualifying')) {
         return (
             <div className="h-70 mt-4 border-black border-[1px] rounded-lg flex justify-center">
@@ -172,6 +183,7 @@ function ResultBody({ selectedYear, selectedCircuit, selectedSession }) {
         )
     }
 
+    // Return no results if an invalid event is selected
     else {
         return (
             <div className="text-2xl flex flex-col justify-center items-center mt-5 border-black border-[1px] rounded-lg p-3">

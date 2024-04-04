@@ -1,3 +1,4 @@
+// Component for a loading spinner
 function Loading() {
     return (
         <div className="box flex justify-center items-center">
